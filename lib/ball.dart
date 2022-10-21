@@ -9,7 +9,7 @@ class myball extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment(0, 0),
+      alignment: Alignment(bx, by),
       child: Container(
         height: 15,
         width: 15,
