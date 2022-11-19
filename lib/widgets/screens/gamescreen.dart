@@ -28,7 +28,7 @@ class _GameScreenState extends State<GameScreen> {
 
     timer = Timer.periodic(const Duration(milliseconds: 10), (timer) {
       setState(() {
-        by += 0.001;
+        by -= 0.001;
       });
     });
   }
