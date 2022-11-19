@@ -8,7 +8,7 @@ class ShopScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
+      backgroundColor: Colors.blue,
       body: Center(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -89,7 +89,7 @@ class ShopScreen extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ShopItem(Colors.blue),
+                  child: ShopItem(Colors.red),
                 ),
               ],
             ),

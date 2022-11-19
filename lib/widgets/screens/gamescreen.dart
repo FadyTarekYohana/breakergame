@@ -59,7 +59,7 @@ class _GameScreenState extends State<GameScreen> {
         }
       },
       child: Scaffold(
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.blue,
         body: Center(
           child: Stack(
             //Tap to play
