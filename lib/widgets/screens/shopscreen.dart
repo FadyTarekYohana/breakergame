@@ -16,8 +16,8 @@ class ShopScreen extends StatelessWidget {
               children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Padding(
+              children: const [
+                Padding(
                   padding: EdgeInsets.all(50.0),
                   child: Text(
                     "SHOP",
@@ -27,7 +27,7 @@ class ShopScreen extends StatelessWidget {
                         fontSize: 20),
                   ),
                 ),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.all(50.0),
                   child: Text(
                     "COINS: 0",

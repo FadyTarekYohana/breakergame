@@ -9,6 +9,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      theme: ThemeData(
+        fontFamily: 'EightBitDragon',
+      ),
       debugShowCheckedModeBanner: false,
       title: "Brick Breaker",
       routerConfig: router,

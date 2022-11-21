@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:breakergame/models/usermodel.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class SignUp extends StatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _LoginState extends State<Login> {
+class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController emailController = TextEditingController();
@@ -27,7 +27,7 @@ class _LoginState extends State<Login> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Padding(
-              padding: EdgeInsets.all(50.0),
+              padding: EdgeInsets.only(top: 50.0),
               child: Text(
                 "BRICK BREAKER",
                 style: TextStyle(
@@ -96,17 +96,28 @@ class _LoginState extends State<Login> {
                   if (_formKey.currentState!.validate()) {
                     UserModel user = UserModel(
                         emailController.text, passwordController.text);
-                    if (user.login()) {
-                      GoRouter.of(context).go('/homepage');
+                    if (user.signup()) {
+                      //GoRouter.of(context).go('/');
                     }
                   }
                 },
                 child: const Text(
-                  'LOGIN',
+                  'SIGN UP',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
                   ),
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () => GoRouter.of(context).go('/'),
+              child: const Text(
+                'LOGIN',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15,
+                  color: Colors.white,
                 ),
               ),
             ),
