@@ -34,7 +34,7 @@ class _GameScreenState extends State<GameScreen> {
 
     timer = Timer.periodic(const Duration(milliseconds: 10), (timer) {
       setState(() {
-        by += 0.005;
+        by -= 0.001;
       });
     });
   }
@@ -79,7 +79,7 @@ class _GameScreenState extends State<GameScreen> {
         }
       },
       child: Scaffold(
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.blue,
         body: Center(
           child: Stack(
             //Tap to play
