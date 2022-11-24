@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
             padding: const EdgeInsets.all(5.0),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: Colors.red[800]),
-              onPressed: () => GoRouter.of(context).go('/gamescreen'),
+              onPressed: () => GoRouter.of(context).go('/levels'),
               child: const Text(
                 'PLAY',
                 style: TextStyle(

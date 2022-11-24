@@ -10,7 +10,7 @@ class Screen extends StatelessWidget {
     return hasGameStarted
         ? Container()
         : Container(
-            alignment: const Alignment(0, -0.4),
+            alignment: const Alignment(0, 0.5),
             child: const Text(
               'Tap The Screen To Start',
               style:
