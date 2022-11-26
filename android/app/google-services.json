@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "515654769918",
-    "project_id": "game-834cc",
-    "storage_bucket": "game-834cc.appspot.com"
+    "project_number": "534216039438",
+    "project_id": "brickbreaker-30f46",
+    "storage_bucket": "brickbreaker-30f46.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:515654769918:android:bd2b48cf99ccf955e7d9af",
+        "mobilesdk_app_id": "1:534216039438:android:7e424359bf512a382ab05f",
         "android_client_info": {
-          "package_name": "eg.edu.miuegypt.csc422.breakergame"
+          "package_name": "com.example.breakergame"
         }
       },
       "oauth_client": [
         {
-          "client_id": "515654769918-t4pbftejpghj9bfvm7dsjvs98l7ul8fi.apps.googleusercontent.com",
+          "client_id": "534216039438-jmal3l12fmqdhhrb8ltq27jti7dk4dul.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.breakergame",
+            "certificate_hash": "7b78730fdb3b0e31a6ed2ae2fa8dafed4b602690"
+          }
+        },
+        {
+          "client_id": "534216039438-je1igna6f78pl730sqvu2h6k26b3qk1f.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDYIqb-L_sBMPhHaB6tcpPiGK_cQLdObaY"
+          "current_key": "AIzaSyAbpMBEkkn6589ffpfyyWK6zufdKb6mP4A"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "515654769918-t4pbftejpghj9bfvm7dsjvs98l7ul8fi.apps.googleusercontent.com",
+              "client_id": "534216039438-je1igna6f78pl730sqvu2h6k26b3qk1f.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

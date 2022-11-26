@@ -1,6 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:breakergame/models/usermodel.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -93,12 +93,20 @@ class _LoginState extends State<Login> {
               child: ElevatedButton(
                 style:
                     ElevatedButton.styleFrom(backgroundColor: Colors.red[800]),
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    UserModel user = UserModel(
-                        emailController.text, passwordController.text);
-                    if (user.login()) {
+                    try {
+                      final credential = await FirebaseAuth.instance
+                          .signInWithEmailAndPassword(
+                              email: emailController.text,
+                              password: passwordController.text);
                       GoRouter.of(context).go('/homepage');
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'user-not-found') {
+                        print('No user found for that email.');
+                      } else if (e.code == 'wrong-password') {
+                        print('Wrong password provided for that user.');
+                      }
                     }
                   }
                 },
