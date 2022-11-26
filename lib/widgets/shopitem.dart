@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'animatedbutton.dart';
+
 class ShopItem extends StatelessWidget {
   final color;
 
@@ -20,15 +22,22 @@ class ShopItem extends StatelessWidget {
             ),
           ),
         ),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(backgroundColor: Colors.red[800]),
-          onPressed: () {},
-          child: const Text(
-            'BUY',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
+        Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: AnimatedButton(
+            child: Text(
+              'BUY',
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+              ),
             ),
+            onPressed: () {},
+            width: 70,
+            height: 40,
+            enabled: true,
+            shadowDegree: ShadowDegree.light,
           ),
         ),
       ],

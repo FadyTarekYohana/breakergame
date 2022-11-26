@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import 'animatedbutton.dart';
+
 class Back extends StatelessWidget {
   final path;
 
@@ -8,15 +10,15 @@ class Back extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(backgroundColor: Colors.red[800]),
-      onPressed: () => GoRouter.of(context).go(path),
-      child: const Text(
-        '<',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 20,
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: AnimatedButton(
+        child: Icon(Icons.arrow_back_rounded, color: Colors.white),
+        onPressed: () => GoRouter.of(context).go(path),
+        width: 50,
+        height: 50,
+        enabled: true,
+        shadowDegree: ShadowDegree.light,
       ),
     );
   }

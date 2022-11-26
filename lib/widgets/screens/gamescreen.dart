@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:breakergame/widgets/backbutton.dart';
 import 'package:breakergame/widgets/ball.dart';
 import 'package:breakergame/widgets/barrier.dart';
 import 'package:breakergame/widgets/brick.dart';
@@ -79,30 +80,14 @@ class _GameScreenState extends State<GameScreen> {
         }
       },
       child: Scaffold(
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.transparent,
         body: Center(
           child: Stack(
             //Tap to play
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red[800]),
-                  onPressed: () {
-                    GoRouter.of(context).go('/levels');
-                    hasGameStarted = false;
-                    timer.cancel();
-                  },
-                  child: const Text(
-                    '<',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
-                ),
-              ),
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: Back('/levels')),
               Screen(hasGameStarted: hasGameStarted),
               if (levelbricks.isNotEmpty)
                 for (var item in levelbricks) Brick(item[1], item[0]),

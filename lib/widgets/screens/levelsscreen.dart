@@ -7,6 +7,8 @@ import 'package:go_router/go_router.dart';
 import 'package:breakergame/widgets/levels/levelManager.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../animatedbutton.dart';
+
 class LevelsScreen extends StatefulWidget {
   const LevelsScreen({Key? key}) : super(key: key);
 
@@ -29,7 +31,7 @@ class _LevelsScreenState extends State<LevelsScreen> {
   Widget build(BuildContext context) {
     updateLevelList();
     return Scaffold(
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.transparent,
         body: Column(
           children: [
             const Padding(
@@ -53,12 +55,17 @@ class _LevelsScreenState extends State<LevelsScreen> {
                   child: Column(
                     children: [
                       Expanded(
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.red[800]),
+                        child: AnimatedButton(
+                          child: Text(
+                            ' ${index + 1}',
+                            style: TextStyle(color: Colors.white),
+                          ),
                           onPressed: () => GoRouter.of(context)
                               .go('/gamescreen', extra: lvl),
-                          child: Text(' ${index + 1}'),
+                          height: 30,
+                          width: 50,
+                          enabled: true,
+                          shadowDegree: ShadowDegree.light,
                         ),
                       ),
                       Expanded(
@@ -85,18 +92,14 @@ class _LevelsScreenState extends State<LevelsScreen> {
               }),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 70.0),
-              child: ElevatedButton(
-                style:
-                    ElevatedButton.styleFrom(backgroundColor: Colors.red[800]),
+              padding: const EdgeInsets.all(5.0),
+              child: AnimatedButton(
+                child: Icon(Icons.add, color: Colors.white),
                 onPressed: () => GoRouter.of(context).go('/levelbuilder'),
-                child: const Text(
-                  '+',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
+                width: 50,
+                height: 50,
+                enabled: true,
+                shadowDegree: ShadowDegree.light,
               ),
             ),
             Padding(

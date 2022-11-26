@@ -6,7 +6,7 @@ class CreditsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.transparent,
       body: Center(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

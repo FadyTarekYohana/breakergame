@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:breakergame/widgets/backbutton.dart';
 
+import '../animatedbutton.dart';
+
 class OptionsScreen extends StatefulWidget {
   const OptionsScreen({Key? key}) : super(key: key);
 
@@ -16,7 +18,7 @@ class _OptionsScreenState extends State<OptionsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.transparent,
       body: Center(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -73,20 +75,19 @@ class _OptionsScreenState extends State<OptionsScreen> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: ElevatedButton(
-                style:
-                    ElevatedButton.styleFrom(backgroundColor: Colors.red[800]),
-                onPressed: () {
-                  GoRouter.of(context).go('/');
-                },
-                child: const Text(
-                  'LOGOUT',
+              padding: const EdgeInsets.all(5.0),
+              child: AnimatedButton(
+                child: Text(
+                  'CREDITS',
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                    fontSize: 22,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
+                onPressed: () => GoRouter.of(context).go('/'),
+                enabled: true,
+                shadowDegree: ShadowDegree.light,
               ),
             ),
             Padding(

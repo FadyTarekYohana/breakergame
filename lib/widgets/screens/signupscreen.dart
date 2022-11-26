@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../animatedbutton.dart';
+
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
@@ -18,7 +20,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
+      backgroundColor: Colors.transparent,
       body: Center(
           child: Form(
         key: _formKey,
@@ -88,10 +90,16 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: ElevatedButton(
-                style:
-                    ElevatedButton.styleFrom(backgroundColor: Colors.red[800]),
+              padding: const EdgeInsets.all(8.0),
+              child: AnimatedButton(
+                child: Text(
+                  'SIGN UP',
+                  style: TextStyle(
+                    fontSize: 22,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     try {
@@ -112,13 +120,8 @@ class _SignUpState extends State<SignUp> {
                     }
                   }
                 },
-                child: const Text(
-                  'SIGN UP',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
+                enabled: true,
+                shadowDegree: ShadowDegree.light,
               ),
             ),
             TextButton(

@@ -4,6 +4,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../animatedbutton.dart';
 import '../backbutton.dart';
 import '../levels/levelManager.dart';
 
@@ -48,7 +49,7 @@ class _LevelBuilderState extends State<LevelBuilder> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
+      backgroundColor: Colors.transparent,
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -94,7 +95,8 @@ class _LevelBuilderState extends State<LevelBuilder> {
                             value: items,
                             child: Text(
                               items,
-                              style: const TextStyle(fontSize: 15),
+                              style: const TextStyle(
+                                  fontSize: 15, color: Colors.white),
                             ),
                           );
                         }).toList(),
@@ -127,29 +129,29 @@ class _LevelBuilderState extends State<LevelBuilder> {
                 Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Back('/levels')),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red[800]),
-                    onPressed: () {
-                      if (barriers.isNotEmpty || bricks.isNotEmpty) {
-                        createLevel();
-                        GoRouter.of(context).go('/levels');
-                        bricks = [];
-                        barriers = [];
-                        dropdownvalue = {};
-                      }
-                    },
-                    child: const Text(
-                      'SAVE',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
+                AnimatedButton(
+                  child: Text(
+                    'SAVE',
+                    style: TextStyle(
+                      fontSize: 22,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
-                )
+                  onPressed: () {
+                    if (barriers.isNotEmpty || bricks.isNotEmpty) {
+                      createLevel();
+                      GoRouter.of(context).go('/levels');
+                      bricks = [];
+                      barriers = [];
+                      dropdownvalue = {};
+                    }
+                  },
+                  width: 80,
+                  height: 50,
+                  enabled: true,
+                  shadowDegree: ShadowDegree.light,
+                ),
               ],
             )
           ],

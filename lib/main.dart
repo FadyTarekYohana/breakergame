@@ -13,13 +13,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      theme: ThemeData(
-        fontFamily: 'EightBitDragon',
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage("assets/images/background.jpg"),
+            fit: BoxFit.cover),
       ),
-      debugShowCheckedModeBanner: false,
-      title: "Brick Breaker",
-      routerConfig: router,
+      child: MaterialApp.router(
+        theme: ThemeData(
+          fontFamily: 'EightBitDragon',
+        ),
+        debugShowCheckedModeBanner: false,
+        title: "Brick Breaker",
+        routerConfig: router,
+      ),
     );
   }
 }
