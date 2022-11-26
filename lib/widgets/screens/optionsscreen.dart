@@ -78,7 +78,7 @@ class _OptionsScreenState extends State<OptionsScreen> {
               padding: const EdgeInsets.all(5.0),
               child: AnimatedButton(
                 child: Text(
-                  'CREDITS',
+                  'LOG OUT',
                   style: TextStyle(
                     fontSize: 22,
                     color: Colors.white,
