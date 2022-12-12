@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../animatedbutton.dart';
+import '../../widgets/animatedbutton.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -35,6 +35,12 @@ class _LoginState extends State<Login> {
                   "BRICK BREAKER",
                   textAlign: TextAlign.center,
                   style: TextStyle(
+                      shadows: [
+                        Shadow(
+                          color: Colors.red,
+                          offset: Offset(3.5, 3.5),
+                        ),
+                      ],
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 40),

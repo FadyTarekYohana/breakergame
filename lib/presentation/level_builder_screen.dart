@@ -1,12 +1,11 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../animatedbutton.dart';
-import '../backbutton.dart';
-import '../levels/levelManager.dart';
+import '../../widgets/animatedbutton.dart';
+import '../../widgets/backbutton.dart';
+import '../../data/levels_repository.dart';
 
 class LevelBuilder extends StatefulWidget {
   const LevelBuilder({super.key});

@@ -1,8 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 
 var levels = [];
+
+final levelsProvider = Provider<List<dynamic>>((ref) {
+  return [];
+});
 
 write(String text) async {
   String date = DateTime.now().toString().replaceAll(RegExp(r'[^0-9]'), '');

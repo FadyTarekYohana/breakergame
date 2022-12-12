@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'widgets/screens/loginscreen.dart';
-import 'widgets/screens/homepage.dart';
-import 'widgets/screens/gamescreen.dart';
-import 'widgets/screens/creditsscreen.dart';
-import 'widgets/screens/optionsscreen.dart';
-import 'widgets/screens/shopscreen.dart';
-import 'widgets/screens/levelsscreen.dart';
-import 'widgets/screens/levelbuilder.dart';
-import 'widgets/screens/signupscreen.dart';
+import '../presentation/login_screen.dart';
+import '../presentation/home_screen.dart';
+import '../presentation/game_screen.dart';
+import '../presentation/credits_screen.dart';
+import '../presentation/options_screen.dart';
+import '../presentation/shop_screen.dart';
+import '../presentation/levels_screen.dart';
+import '../presentation/level_builder_screen.dart';
+import '../presentation/signup_screen.dart';
 
 final GoRouter router = GoRouter(
   routes: [

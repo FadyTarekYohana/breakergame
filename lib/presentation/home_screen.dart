@@ -1,0 +1,102 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../widgets/animatedbutton.dart';
+
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Text(
+              "BRICK BREAKER",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  shadows: [
+                    Shadow(
+                      color: Colors.red,
+                      offset: Offset(3.5, 3.5),
+                    ),
+                  ],
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 40),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: AnimatedButton(
+              child: Text(
+                'PLAY',
+                style: TextStyle(
+                  fontSize: 22,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              onPressed: () => GoRouter.of(context).go('/levels'),
+              enabled: true,
+              shadowDegree: ShadowDegree.light,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: AnimatedButton(
+              child: Text(
+                'SHOP',
+                style: TextStyle(
+                  fontSize: 22,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              onPressed: () => GoRouter.of(context).go('/shopscreen'),
+              enabled: true,
+              shadowDegree: ShadowDegree.light,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: AnimatedButton(
+              child: Text(
+                'OPTIONS',
+                style: TextStyle(
+                  fontSize: 22,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              onPressed: () => GoRouter.of(context).go('/optionsscreen'),
+              enabled: true,
+              shadowDegree: ShadowDegree.light,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: AnimatedButton(
+              child: Text(
+                'CREDITS',
+                style: TextStyle(
+                  fontSize: 22,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              onPressed: () => GoRouter.of(context).go('/creditsscreen'),
+              enabled: true,
+              shadowDegree: ShadowDegree.light,
+            ),
+          ),
+        ],
+      )),
+    );
+  }
+}

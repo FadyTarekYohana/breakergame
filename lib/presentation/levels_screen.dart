@@ -1,35 +1,17 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:breakergame/widgets/backbutton.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:breakergame/widgets/levels/levelManager.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:breakergame/data/levels_repository.dart';
+import '../../widgets/animatedbutton.dart';
 
-import '../animatedbutton.dart';
-
-class LevelsScreen extends StatefulWidget {
-  const LevelsScreen({Key? key}) : super(key: key);
+class LevelsScreen extends ConsumerWidget {
+  const LevelsScreen({super.key});
 
   @override
-  State<LevelsScreen> createState() => _LevelsScreenState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final levels = ref.watch(levelsProvider);
 
-class _LevelsScreenState extends State<LevelsScreen> {
-  void updateLevelList() {
-    setState(() {});
-  }
-
-  @override
-  void initState() {
-    updateLevelList();
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    updateLevelList();
     return Scaffold(
         backgroundColor: Colors.transparent,
         body: Column(

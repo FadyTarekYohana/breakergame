@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../animatedbutton.dart';
+import '../../widgets/animatedbutton.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -32,7 +32,14 @@ class _SignUpState extends State<SignUp> {
               padding: EdgeInsets.only(top: 50.0),
               child: Text(
                 "BRICK BREAKER",
+                textAlign: TextAlign.center,
                 style: TextStyle(
+                    shadows: [
+                      Shadow(
+                        color: Colors.red,
+                        offset: Offset(3.5, 3.5),
+                      ),
+                    ],
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 40),

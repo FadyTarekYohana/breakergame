@@ -7,9 +7,8 @@ import 'package:breakergame/widgets/barrier.dart';
 import 'package:breakergame/widgets/brick.dart';
 import 'package:breakergame/widgets/player.dart';
 import 'package:breakergame/widgets/screen.dart';
-import 'package:breakergame/widgets/levels/levelManager.dart';
+import 'package:breakergame/data/levels_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class GameScreen extends StatefulWidget {
   final String level;

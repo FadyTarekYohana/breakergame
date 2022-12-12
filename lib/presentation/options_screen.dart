@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:breakergame/widgets/backbutton.dart';
 
-import '../animatedbutton.dart';
+import '../../widgets/animatedbutton.dart';
 
 class OptionsScreen extends StatefulWidget {
   const OptionsScreen({Key? key}) : super(key: key);
