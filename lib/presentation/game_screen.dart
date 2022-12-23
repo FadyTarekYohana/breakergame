@@ -18,8 +18,12 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-  var levelbarriers = [];
-  var levelbricks = [];
+  final List<List<double>> levelbarriers = [
+    [-0.325, -0.38]
+  ];
+  final List<List<double>> levelbricks = [
+    [-0.65, -0.62]
+  ];
   double bx = 0;
   double by = 0.2;
 
@@ -51,19 +55,19 @@ class _GameScreenState extends State<GameScreen> {
     }
   }
 
-  loadList() async {
-    var level = jsonDecode(await read(widget.level));
-    setState(() {
-      levelbricks = level[0];
-      levelbarriers = level[1];
-    });
-  }
+  // loadList() async {
+  //   var level = jsonDecode(await read(widget.level));
+  //   setState(() {
+  //     levelbricks = level[0];
+  //     levelbarriers = level[1];
+  //   });
+  // }
 
-  @override
-  void initState() {
-    loadList();
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   loadList();
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {

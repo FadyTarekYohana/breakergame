@@ -1,11 +1,10 @@
-import 'dart:convert';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../widgets/animatedbutton.dart';
 import '../../widgets/backbutton.dart';
 import '../../data/levels_repository.dart';
+import '../domain/level.dart';
 
 class LevelBuilder extends StatefulWidget {
   const LevelBuilder({super.key});
@@ -37,11 +36,6 @@ void addToList(List<List<double>> list, double i, double j) {
     (element) => eq.equals(element, [i, j]),
   );
   item == null ? list.add([i, j]) : null;
-}
-
-void createLevel() {
-  String jsonLevel = jsonEncode([bricks, barriers]);
-  write(jsonLevel);
 }
 
 class _LevelBuilderState extends State<LevelBuilder> {
@@ -140,7 +134,7 @@ class _LevelBuilderState extends State<LevelBuilder> {
                   ),
                   onPressed: () {
                     if (barriers.isNotEmpty || bricks.isNotEmpty) {
-                      createLevel();
+                      createLevel(bricks, barriers);
                       GoRouter.of(context).go('/levels');
                       bricks = [];
                       barriers = [];
