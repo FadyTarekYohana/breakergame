@@ -24,6 +24,8 @@ class _GameScreenState extends State<GameScreen> {
   final List<List<double>> levelbricks = [
     [-0.65, -0.62]
   ];
+  List<dynamic> bricksx = [], bricksy = [], barriersx = [], barriersy = [];
+
   double bx = 0;
   double by = 0.2;
 
@@ -38,7 +40,7 @@ class _GameScreenState extends State<GameScreen> {
 
     timer = Timer.periodic(const Duration(milliseconds: 10), (timer) {
       setState(() {
-        by -= 0.001;
+        by -= 0.007;
       });
     });
   }
@@ -50,24 +52,31 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   void movePlayerRight(double delta) {
+    print(barriersx);
     if (!(playerX + playerWidth + delta.abs() > 1)) {
       playerX += delta.abs();
     }
   }
 
-  // loadList() async {
-  //   var level = jsonDecode(await read(widget.level));
-  //   setState(() {
-  //     levelbricks = level[0];
-  //     levelbarriers = level[1];
-  //   });
-  // }
+  void loadLevel() async {
+    final levelData = await readLevel(widget.level);
+    setState(() {
+      bricksx = levelData!["bricksx"];
+      bricksy = levelData!["bricksy"];
+      barriersx = levelData!["barriersx"];
+      barriersy = levelData!["barriersy"];
+    });
 
-  // @override
-  // void initState() {
-  //   loadList();
-  //   super.initState();
-  // }
+    print(barriersx);
+  }
+
+  @override
+  void initState() {
+    print(barriersx);
+    loadLevel();
+    print(barriersx);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,10 +101,10 @@ class _GameScreenState extends State<GameScreen> {
                   padding: const EdgeInsets.only(top: 20.0),
                   child: Back('/levels')),
               Screen(hasGameStarted: hasGameStarted),
-              if (levelbricks.isNotEmpty)
-                for (var item in levelbricks) Brick(item[1], item[0]),
-              if (levelbarriers.isNotEmpty)
-                for (var item in levelbarriers) Barrier(item[1], item[0]),
+              for (int i = 0; i < bricksx.length; i++)
+                Brick(bricksx[i], bricksy[i]),
+              for (int i = 0; i < barriersx.length; i++)
+                Barrier(barriersx[i], barriersy[i]),
               myball(bx, by),
               MyPlayer(playerX, playerWidth)
             ],
