@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../domain/level.dart';
 
-var levels = [];
-
 void createLevel(List<List<double>> bricks, List<List<double>> barriers) async {
   final List<double> bricksx = [], bricksy = [], barriersx = [], barriersy = [];
   final flattenedBricks = bricks.expand((element) => element).toList();
