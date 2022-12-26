@@ -1,5 +1,6 @@
-import 'package:breakergame/domain/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:breakergame/domain/user.dart';
+import 'package:firebase_auth/firebase_auth.dart' show FirebaseAuth;
 
 void createUser(String type, String email, String id) async {
   final docLevels = FirebaseFirestore.instance.collection('users').doc();
@@ -16,6 +17,14 @@ dynamic getAdminCode() async {
   var value = data?['code'];
 
   return value;
+}
+
+dynamic getUser() async {
+  var collection = FirebaseFirestore.instance.collection('users');
+  var docSnapshot =
+      await collection.doc(FirebaseAuth.instance.currentUser!.uid).get();
+  Map<String, dynamic>? data = docSnapshot.data();
+  return data;
 }
 
 void setAdminCode(String code) {

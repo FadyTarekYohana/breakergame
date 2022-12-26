@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class Screen extends StatelessWidget {
+class GameStartScreen extends StatelessWidget {
   final bool hasGameStarted;
 
-  Screen({required this.hasGameStarted});
+  GameStartScreen({required this.hasGameStarted});
 
   @override
   Widget build(BuildContext context) {
