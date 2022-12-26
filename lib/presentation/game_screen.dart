@@ -52,7 +52,6 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   void movePlayerRight(double delta) {
-    print(barriersx);
     if (!(playerX + playerWidth + delta.abs() > 1)) {
       playerX += delta.abs();
     }
@@ -66,15 +65,11 @@ class _GameScreenState extends State<GameScreen> {
       barriersx = levelData!["barriersx"];
       barriersy = levelData!["barriersy"];
     });
-
-    print(barriersx);
   }
 
   @override
   void initState() {
-    print(barriersx);
     loadLevel();
-    print(barriersx);
     super.initState();
   }
 
@@ -95,7 +90,6 @@ class _GameScreenState extends State<GameScreen> {
         backgroundColor: Colors.transparent,
         body: Center(
           child: Stack(
-            //Tap to play
             children: [
               Padding(
                   padding: const EdgeInsets.only(top: 20.0),

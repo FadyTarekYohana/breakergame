@@ -20,16 +20,11 @@ class _LevelsScreenState extends State<LevelsScreen> {
       body: StreamBuilder<List<Level>>(
           stream: readLevels(),
           builder: (context, snapshot) {
-            print(
-                '#################################################\n###########################################');
-            print(snapshot.data);
-            print(
-                '#################################################\n###########################################');
             if (snapshot.hasData) {
               final allLevels = snapshot.data!;
               return Stack(children: [
-                Padding(
-                  padding: const EdgeInsets.all(50.0),
+                const Padding(
+                  padding: EdgeInsets.all(50.0),
                   child: Align(
                     alignment: Alignment.topCenter,
                     child: Text(
@@ -59,7 +54,7 @@ class _LevelsScreenState extends State<LevelsScreen> {
                   }),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
-                    childAspectRatio: 0.7,
+                    mainAxisExtent: 150,
                   ),
                 ),
                 Padding(
