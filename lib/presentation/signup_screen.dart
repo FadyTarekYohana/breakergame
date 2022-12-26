@@ -1,3 +1,4 @@
+import 'package:breakergame/data/users_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -16,6 +17,7 @@ class _SignUpState extends State<SignUp> {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController adminCodeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -97,6 +99,25 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
             Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: TextFormField(
+                controller: adminCodeController,
+                obscureText: true,
+                style: const TextStyle(color: Colors.white),
+                decoration: const InputDecoration(
+                  icon: Icon(Icons.admin_panel_settings, color: Colors.white),
+                  hintText: 'CODE TO SIGN UP AS ADMIN',
+                  hintStyle: TextStyle(color: Colors.white),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.all(8.0),
               child: AnimatedButton(
                 child: Text(
@@ -110,12 +131,27 @@ class _SignUpState extends State<SignUp> {
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     try {
-                      final credential = await FirebaseAuth.instance
-                          .createUserWithEmailAndPassword(
-                        email: emailController.text,
-                        password: passwordController.text,
-                      );
-                      GoRouter.of(context).go('/homepage');
+                      if (adminCodeController.text.isNotEmpty) {
+                        if (adminCodeController.text == await getAdminCode()) {
+                          final credential = await FirebaseAuth.instance
+                              .createUserWithEmailAndPassword(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          );
+                          createUser("admin", emailController.text,
+                              credential.user!.uid);
+                          GoRouter.of(context).go('/homepage');
+                        }
+                      } else {
+                        final credential = await FirebaseAuth.instance
+                            .createUserWithEmailAndPassword(
+                          email: emailController.text,
+                          password: passwordController.text,
+                        );
+                        createUser(
+                            "user", emailController.text, credential.user!.uid);
+                        GoRouter.of(context).go('/homepage');
+                      }
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'weak-password') {
                         print('The password provided is too weak.');
