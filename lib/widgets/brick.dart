@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
 
 class Brick extends StatelessWidget {
+  final double width;
+  final double height;
   final double x;
   final double y;
-  final bool broken = false;
+  final bool broken;
 
-  Brick(this.x, this.y);
+  Brick(this.width, this.height, this.x, this.y, this.broken);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        alignment: Alignment(x, y),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(5),
-          child: Container(
-            height: 20,
-            width: MediaQuery.of(context).size.width * 0.25 / 2,
-            color: Colors.white,
-          ),
-        ));
+    return broken
+        ? Container()
+        : Container(
+            alignment: Alignment(x, y),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: Container(
+                height: MediaQuery.of(context).size.height * height / 2,
+                width: MediaQuery.of(context).size.width * width / 2,
+                color: Colors.white,
+              ),
+            ));
   }
 }

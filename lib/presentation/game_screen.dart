@@ -1,14 +1,18 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:breakergame/widgets/backbutton.dart';
 import 'package:breakergame/widgets/ball.dart';
 import 'package:breakergame/widgets/barrier.dart';
 import 'package:breakergame/widgets/brick.dart';
+import 'package:breakergame/widgets/game_over.dart';
+import 'package:breakergame/widgets/level_complete.dart';
 import 'package:breakergame/widgets/player.dart';
-import 'package:breakergame/widgets/screen.dart';
+import 'package:breakergame/widgets/game_start.dart';
 import 'package:breakergame/data/levels_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import '../widgets/animatedbutton.dart';
 
 class GameScreen extends StatefulWidget {
   final String level;
@@ -17,6 +21,8 @@ class GameScreen extends StatefulWidget {
   _GameScreenState createState() => _GameScreenState();
 }
 
+enum direction { UP, DOWN, LEFT, RIGHT }
+
 class _GameScreenState extends State<GameScreen> {
   final List<List<double>> levelbarriers = [
     [-0.325, -0.38]
@@ -24,24 +30,207 @@ class _GameScreenState extends State<GameScreen> {
   final List<List<double>> levelbricks = [
     [-0.65, -0.62]
   ];
-  List<dynamic> bricksx = [], bricksy = [], barriersx = [], barriersy = [];
+  List<dynamic> bricksx = [],
+      bricksy = [],
+      barriersx = [],
+      barriersy = [],
+      broken = [];
 
-  double bx = 0;
-  double by = 0.2;
+  double ballX = 0;
+  double ballY = 0;
+  double ballXmovement = 0.007;
+  double ballYmovement = 0.007;
+
+  var ballXDirection = direction.DOWN;
+  var ballYDirection = direction.DOWN;
+
+  double brickWidth = 0.25;
+  double brickHeight = 0.05;
+
+  double barrierWidth = 0.25;
+  double barrierHeight = 0.05;
 
   double playerWidth = 0.3;
   double playerX = -0.15;
 
   late Timer timer;
 
+  bool levelComplete = false;
   bool hasGameStarted = false;
-  void startGame() {
-    bool hasGameStarted = true;
+  bool isGameOver = false;
 
-    timer = Timer.periodic(const Duration(milliseconds: 10), (timer) {
-      setState(() {
-        by -= 0.007;
+  void gameLoop() {
+    if (hasGameStarted == false) {
+      hasGameStarted = true;
+
+      timer = Timer.periodic(const Duration(milliseconds: 10), (timer) {
+        updateDirection();
+        moveBall();
+        if (isPlayerDead()) {
+          timer.cancel();
+          isGameOver = true;
+        }
+        if (isLevelComplete()) {
+          timer.cancel();
+          levelComplete = true;
+        }
+        if (barriersx.isNotEmpty) checkForBarriers();
+        checkForBrokenBricks();
       });
+    }
+  }
+
+  bool isLevelComplete() {
+    if (broken.every((element) => element == true)) {
+      return true;
+    }
+    return false;
+  }
+
+  void checkForBarriers() {
+    for (int i = 0; i < barriersx.length; i++) {
+      if (ballX >= barriersx[i] &&
+          ballX <= barriersx[i] + barrierWidth &&
+          ballY >= barriersy[i] &&
+          ballY <= barriersy[i] + barrierHeight) {
+        setState(() {
+          double leftSideDist = (barriersx[i] - ballX).abs();
+          double rightSideDist = (barriersx[i] + barrierWidth - ballX).abs();
+          double topSideDist = (barriersy[i] - ballY).abs();
+          double bottomSideDist = (barriersy[i] + barrierHeight - ballY).abs();
+
+          String min =
+              findMin(leftSideDist, rightSideDist, topSideDist, bottomSideDist);
+
+          switch (min) {
+            case 'left':
+              ballXDirection = direction.LEFT;
+              break;
+            case 'right':
+              ballXDirection = direction.RIGHT;
+              break;
+            case 'top':
+              ballYDirection = direction.UP;
+              break;
+            case 'bottom':
+              ballYDirection = direction.DOWN;
+              break;
+            default:
+          }
+        });
+      }
+    }
+  }
+
+  void checkForBrokenBricks() {
+    for (int i = 0; i < bricksx.length; i++) {
+      if (ballX >= bricksx[i] &&
+          ballX <= bricksx[i] + brickWidth &&
+          ballY >= bricksy[i] &&
+          ballY <= bricksy[i] + brickHeight &&
+          broken[i] == false) {
+        setState(() {
+          broken[i] = true;
+          double leftSideDist = (bricksx[i] - ballX).abs();
+          double rightSideDist = (bricksx[i] + brickWidth - ballX).abs();
+          double topSideDist = (bricksy[i] - ballY).abs();
+          double bottomSideDist = (bricksy[i] + brickHeight - ballY).abs();
+
+          String min =
+              findMin(leftSideDist, rightSideDist, topSideDist, bottomSideDist);
+
+          switch (min) {
+            case 'left':
+              ballXDirection = direction.LEFT;
+              break;
+            case 'right':
+              ballXDirection = direction.RIGHT;
+              break;
+            case 'top':
+              ballYDirection = direction.UP;
+              break;
+            case 'bottom':
+              ballYDirection = direction.DOWN;
+              break;
+            default:
+          }
+        });
+      }
+    }
+  }
+
+  String findMin(double a, double b, double c, double d) {
+    List<double> list = [a, b, c, d];
+    double min = a;
+
+    for (int i = 0; i < list.length; i++) {
+      if (list[i] < min) {
+        min = list[i];
+      }
+    }
+
+    if ((min - a).abs() < 0.01) {
+      return 'left';
+    } else if ((min - b).abs() < 0.01) {
+      return 'right';
+    } else if ((min - c).abs() < 0.01) {
+      return 'top';
+    } else if ((min - d).abs() < 0.01) {
+      return 'bottom';
+    }
+
+    return '';
+  }
+
+  bool isPlayerDead() {
+    if (ballY >= 1) {
+      return true;
+    }
+
+    return false;
+  }
+
+  void updateDirection() {
+    setState(() {
+      double leftSideDist = (playerX - ballX).abs();
+      double rightSideDist = (playerX + playerWidth - ballX).abs();
+      if (ballY >= 0.9 && ballX >= playerX && ballX <= playerX + playerWidth) {
+        ballYDirection = direction.UP;
+        String min = findMin(leftSideDist, rightSideDist, 1000, 1000);
+        switch (min) {
+          case 'left':
+            ballXDirection = direction.LEFT;
+            break;
+          case 'right':
+            ballXDirection = direction.RIGHT;
+            break;
+          default:
+        }
+      } else if (ballY <= -0.82) {
+        ballYDirection = direction.DOWN;
+      }
+
+      if (ballX >= 1) {
+        ballXDirection = direction.LEFT;
+      } else if (ballX <= -1) {
+        ballXDirection = direction.RIGHT;
+      }
+    });
+  }
+
+  void moveBall() {
+    setState(() {
+      if (ballXDirection == direction.LEFT) {
+        ballX -= ballXmovement;
+      } else if (ballXDirection == direction.RIGHT) {
+        ballX += ballXmovement;
+      }
+
+      if (ballYDirection == direction.DOWN) {
+        ballY += ballYmovement;
+      } else if (ballYDirection == direction.UP) {
+        ballY -= ballYmovement;
+      }
     });
   }
 
@@ -61,9 +250,10 @@ class _GameScreenState extends State<GameScreen> {
     final levelData = await readLevel(widget.level);
     setState(() {
       bricksx = levelData!["bricksx"];
-      bricksy = levelData!["bricksy"];
-      barriersx = levelData!["barriersx"];
-      barriersy = levelData!["barriersy"];
+      bricksy = levelData["bricksy"];
+      barriersx = levelData["barriersx"];
+      barriersy = levelData["barriersy"];
+      broken = List.filled(bricksx.length, false);
     });
   }
 
@@ -76,7 +266,7 @@ class _GameScreenState extends State<GameScreen> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: startGame,
+      onTap: gameLoop,
       onHorizontalDragUpdate: (details) {
         if (details.delta.dx > 0) {
           movePlayerRight(
@@ -92,14 +282,31 @@ class _GameScreenState extends State<GameScreen> {
           child: Stack(
             children: [
               Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
-                  child: Back('/levels')),
-              Screen(hasGameStarted: hasGameStarted),
+                padding: const EdgeInsets.only(top: 20.0),
+                child: AnimatedButton(
+                  child: Icon(Icons.arrow_back_rounded, color: Colors.white),
+                  onPressed: () {
+                    broken.forEach((element) {
+                      element = false;
+                    });
+                    GoRouter.of(context).go('/levels');
+                  },
+                  width: 50,
+                  height: 50,
+                  enabled: true,
+                  shadowDegree: ShadowDegree.light,
+                ),
+              ),
+              LevelCompleteScreen(isLevelComplete: levelComplete),
+              GameStartScreen(hasGameStarted: hasGameStarted),
+              GameOverScreen(isGameOver: isGameOver),
               for (int i = 0; i < bricksx.length; i++)
-                Brick(bricksx[i], bricksy[i]),
+                Brick(
+                    brickWidth, brickHeight, bricksx[i], bricksy[i], broken[i]),
               for (int i = 0; i < barriersx.length; i++)
-                Barrier(barriersx[i], barriersy[i]),
-              myball(bx, by),
+                Barrier(
+                    barrierWidth, barrierHeight, barriersx[i], barriersy[i]),
+              myball(ballX, ballY),
               MyPlayer(playerX, playerWidth)
             ],
           ),

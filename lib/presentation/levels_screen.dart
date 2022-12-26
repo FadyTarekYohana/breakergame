@@ -1,3 +1,7 @@
+import 'package:breakergame/data/users_repository.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import '../widgets/backbutton.dart';
 import 'package:breakergame/data/levels_repository.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +25,7 @@ class _LevelsScreenState extends State<LevelsScreen> {
           stream: readLevels(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              final allLevels = snapshot.data!;
+              final allLevels = snapshot.data!.reversed.toList();
               return Stack(children: [
                 const Padding(
                   padding: EdgeInsets.all(50.0),

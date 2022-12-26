@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 class Barrier extends StatelessWidget {
   final double x;
   final double y;
+  final double width;
+  final double height;
 
-  Barrier(this.x, this.y);
+  Barrier(this.width, this.height, this.x, this.y);
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +15,8 @@ class Barrier extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(3),
           child: Container(
-            height: 20,
-            width: MediaQuery.of(context).size.width * 0.25 / 2,
+            height: MediaQuery.of(context).size.height * height / 2,
+            width: MediaQuery.of(context).size.width * width / 2,
             color: Colors.grey,
           ),
         ));
