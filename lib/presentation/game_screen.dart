@@ -38,8 +38,8 @@ class _GameScreenState extends State<GameScreen> {
 
   double ballX = 0;
   double ballY = 0;
-  double ballXmovement = 0.007;
-  double ballYmovement = 0.007;
+  double ballXmovement = 0.1;
+  double ballYmovement = 0.1;
 
   var ballXDirection = direction.DOWN;
   var ballYDirection = direction.DOWN;
