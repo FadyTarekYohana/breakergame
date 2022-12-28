@@ -35,7 +35,7 @@ class GameOverScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                         child: Container(
                           padding: EdgeInsets.all(10),
-                          color: Colors.deepPurple,
+                          color: Colors.red,
                           child: Text(
                             'Play Again',
                             style: gameFont,
