@@ -10,8 +10,8 @@ class GameOverScreen extends StatelessWidget {
 
   //font
   static var gameFont = GoogleFonts.pressStart2p(
-      textStyle: TextStyle(
-          color: Colors.deepPurple[600], letterSpacing: 0, fontSize: 28));
+      textStyle:
+          TextStyle(color: Colors.white, letterSpacing: 0, fontSize: 28));
 
   GameOverScreen({super.key, required this.isGameOver, this.function});
 
