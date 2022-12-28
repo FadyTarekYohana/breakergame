@@ -257,6 +257,18 @@ class _GameScreenState extends State<GameScreen> {
     });
   }
 
+  void resetGame() {
+    setState(() {
+      broken = List.filled(bricksx.length, false);
+      ballX = 0;
+      ballY = 0;
+      ballXDirection = direction.DOWN;
+      ballYDirection = direction.DOWN;
+      playerX = -0.15;
+      playerWidth = 0.3;
+    });
+  }
+
   @override
   void initState() {
     loadLevel();
@@ -299,14 +311,20 @@ class _GameScreenState extends State<GameScreen> {
               ),
               LevelCompleteScreen(isLevelComplete: levelComplete),
               GameStartScreen(hasGameStarted: hasGameStarted),
-              GameOverScreen(isGameOver: isGameOver),
+              GameOverScreen(
+                isGameOver: isGameOver,
+                function: resetGame,
+              ),
               for (int i = 0; i < bricksx.length; i++)
                 Brick(
                     brickWidth, brickHeight, bricksx[i], bricksy[i], broken[i]),
               for (int i = 0; i < barriersx.length; i++)
                 Barrier(
                     barrierWidth, barrierHeight, barriersx[i], barriersy[i]),
-              myball(ballX, ballY),
+              myball(
+                ballX,
+                ballY,
+              ),
               MyPlayer(playerX, playerWidth)
             ],
           ),
