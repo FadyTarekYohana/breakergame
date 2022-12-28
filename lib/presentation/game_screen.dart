@@ -262,6 +262,9 @@ class _GameScreenState extends State<GameScreen> {
       broken = List.filled(bricksx.length, false);
       ballX = 0;
       ballY = 0;
+      isGameOver = false;
+      hasGameStarted = false;
+      levelComplete = false;
       ballXDirection = direction.DOWN;
       ballYDirection = direction.DOWN;
       playerX = -0.15;
