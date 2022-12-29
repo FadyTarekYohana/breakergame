@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:breakergame/widgets/backbutton.dart';
 
 import '../../widgets/animatedbutton.dart';
+import '../widgets/quote_of_the_day.dart';
 
 class OptionsScreen extends StatefulWidget {
   const OptionsScreen({Key? key}) : super(key: key);
@@ -159,6 +160,7 @@ class _OptionsScreenState extends State<OptionsScreen> {
                 shadowDegree: ShadowDegree.light,
               ),
             ),
+            QuoteOfTheDay(),
             Padding(
                 padding: const EdgeInsets.only(top: 50),
                 child: Back('/homepage')),

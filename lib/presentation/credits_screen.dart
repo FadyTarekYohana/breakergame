@@ -1,3 +1,4 @@
+import 'package:breakergame/widgets/quote_of_the_day.dart';
 import 'package:flutter/material.dart';
 import 'package:breakergame/widgets/backbutton.dart';
 
