@@ -3,11 +3,11 @@ import 'package:breakergame/domain/user.dart';
 import 'package:firebase_auth/firebase_auth.dart' show FirebaseAuth;
 
 void createUser(String type, String email, String id) async {
-  final docLevels = FirebaseFirestore.instance.collection('users').doc();
+  final docUsers = FirebaseFirestore.instance.collection('users').doc(id);
   final user =
       User(id: id, type: type, coins: 0, email: email, colors: ["grey"]);
   final json = user.toJson();
-  await docLevels.set(json);
+  await docUsers.set(json);
 }
 
 dynamic getAdminCode() async {

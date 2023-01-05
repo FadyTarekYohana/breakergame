@@ -17,6 +17,23 @@ class LevelsScreen extends StatefulWidget {
 }
 
 class _LevelsScreenState extends State<LevelsScreen> {
+  bool isAdmin = false;
+
+  checkAdmin() async {
+    var user = await getUser();
+    if (user['type'] == 'admin') {
+      setState(() {
+        isAdmin = true;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    checkAdmin();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,16 +80,19 @@ class _LevelsScreenState extends State<LevelsScreen> {
                               ),
                             ),
                           ),
-                          AnimatedButton(
-                            onPressed: () => deleteLevel(allLevels[index].id),
-                            height: 40,
-                            width: 60,
-                            enabled: true,
-                            shadowDegree: ShadowDegree.light,
-                            child: const Text(
-                              'DELETE',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 10),
+                          Visibility(
+                            visible: isAdmin,
+                            child: AnimatedButton(
+                              onPressed: () => deleteLevel(allLevels[index].id),
+                              height: 40,
+                              width: 60,
+                              enabled: true,
+                              shadowDegree: ShadowDegree.light,
+                              child: const Text(
+                                'DELETE',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 10),
+                              ),
                             ),
                           ),
                         ],
@@ -85,17 +105,21 @@ class _LevelsScreenState extends State<LevelsScreen> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: AnimatedButton(
-                      onPressed: () => GoRouter.of(context).go('/levelbuilder'),
-                      width: 50,
-                      height: 50,
-                      enabled: true,
-                      shadowDegree: ShadowDegree.light,
-                      child: const Icon(Icons.add, color: Colors.white),
+                Visibility(
+                  visible: isAdmin,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: AnimatedButton(
+                        onPressed: () =>
+                            GoRouter.of(context).go('/levelbuilder'),
+                        width: 50,
+                        height: 50,
+                        enabled: true,
+                        shadowDegree: ShadowDegree.light,
+                        child: const Icon(Icons.add, color: Colors.white),
+                      ),
                     ),
                   ),
                 ),
@@ -112,16 +136,19 @@ class _LevelsScreenState extends State<LevelsScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: AnimatedButton(
-                        onPressed: () =>
-                            GoRouter.of(context).go('/levelbuilder'),
-                        width: 50,
-                        height: 50,
-                        enabled: true,
-                        shadowDegree: ShadowDegree.light,
-                        child: const Icon(Icons.add, color: Colors.white),
+                    Visibility(
+                      visible: isAdmin,
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: AnimatedButton(
+                          onPressed: () =>
+                              GoRouter.of(context).go('/levelbuilder'),
+                          width: 50,
+                          height: 50,
+                          enabled: true,
+                          shadowDegree: ShadowDegree.light,
+                          child: const Icon(Icons.add, color: Colors.white),
+                        ),
                       ),
                     ),
                     Padding(

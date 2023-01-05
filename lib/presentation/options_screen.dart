@@ -19,9 +19,17 @@ class _OptionsScreenState extends State<OptionsScreen> {
 
   bool sound = true;
   bool music = true;
+  bool isAdmin = false;
   var code = '';
 
   loadCode() async {
+    var user = await getUser();
+
+    if (user['type'] == 'admin') {
+      setState(() {
+        isAdmin = true;
+      });
+    }
     code = await getAdminCode();
     setState(() {
       code;
@@ -43,52 +51,59 @@ class _OptionsScreenState extends State<OptionsScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-            Text(
-              "CODE: $code",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30),
-            ),
-            TextFormField(
-              textAlign: TextAlign.center,
-              controller: adminCodeController,
-              style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                hintText: 'CASE SENSITIVE CODE',
-                hintStyle: TextStyle(color: Colors.white),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-              ),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'CODE CAN\'T BE EMPTY';
-                } else {
-                  return null;
-                }
-              },
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: AnimatedButton(
-                child: Text(
-                  'CHANGE CODE',
-                  style: TextStyle(
-                    fontSize: 22,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
+            Visibility(
+              visible: isAdmin,
+              child: Column(
+                children: [
+                  Text(
+                    "CODE: $code",
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30),
                   ),
-                ),
-                onPressed: () async {
-                  setAdminCode(adminCodeController.text);
-                  loadCode();
-                },
-                enabled: true,
-                shadowDegree: ShadowDegree.light,
+                  TextFormField(
+                    textAlign: TextAlign.center,
+                    controller: adminCodeController,
+                    style: const TextStyle(color: Colors.white),
+                    decoration: const InputDecoration(
+                      hintText: 'CASE SENSITIVE CODE',
+                      hintStyle: TextStyle(color: Colors.white),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'CODE CAN\'T BE EMPTY';
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: AnimatedButton(
+                      onPressed: () async {
+                        setAdminCode(adminCodeController.text);
+                        loadCode();
+                      },
+                      enabled: true,
+                      shadowDegree: ShadowDegree.light,
+                      child: const Text(
+                        'CHANGE CODE',
+                        style: TextStyle(
+                          fontSize: 22,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             Row(
@@ -111,8 +126,8 @@ class _OptionsScreenState extends State<OptionsScreen> {
                       sound = value;
                     });
                   },
-                  activeTrackColor: Color.fromARGB(255, 126, 25, 18),
-                  activeColor: Color.fromARGB(255, 255, 0, 0),
+                  activeTrackColor: const Color.fromARGB(255, 126, 25, 18),
+                  activeColor: const Color.fromARGB(255, 255, 0, 0),
                 )
               ],
             ),
@@ -144,7 +159,13 @@ class _OptionsScreenState extends State<OptionsScreen> {
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: AnimatedButton(
-                child: Text(
+                onPressed: () async {
+                  await FirebaseAuth.instance.signOut();
+                  GoRouter.of(context).go('/');
+                },
+                enabled: true,
+                shadowDegree: ShadowDegree.light,
+                child: const Text(
                   'LOG OUT',
                   style: TextStyle(
                     fontSize: 22,
@@ -152,12 +173,6 @@ class _OptionsScreenState extends State<OptionsScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                onPressed: () async {
-                  await FirebaseAuth.instance.signOut();
-                  GoRouter.of(context).go('/');
-                },
-                enabled: true,
-                shadowDegree: ShadowDegree.light,
               ),
             ),
             QuoteOfTheDay(),
