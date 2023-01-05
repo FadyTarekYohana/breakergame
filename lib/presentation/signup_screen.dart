@@ -120,14 +120,6 @@ class _SignUpState extends State<SignUp> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: AnimatedButton(
-                child: Text(
-                  'SIGN UP',
-                  style: TextStyle(
-                    fontSize: 22,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     try {
@@ -165,6 +157,14 @@ class _SignUpState extends State<SignUp> {
                 },
                 enabled: true,
                 shadowDegree: ShadowDegree.light,
+                child: const Text(
+                  'SIGN UP',
+                  style: TextStyle(
+                    fontSize: 22,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
             ),
             TextButton(
