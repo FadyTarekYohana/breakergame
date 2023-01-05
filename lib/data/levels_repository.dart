@@ -41,3 +41,7 @@ Future<Map<String, dynamic>?> readLevel(String id) async {
 
   return data;
 }
+
+Future<void> deleteLevel(String id) async {
+  await FirebaseFirestore.instance.collection('levels').doc(id).delete();
+}

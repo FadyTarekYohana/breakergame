@@ -24,7 +24,7 @@ class _LevelsScreenState extends State<LevelsScreen> {
       body: StreamBuilder<List<Level>>(
           stream: readLevels(),
           builder: (context, snapshot) {
-            if (snapshot.hasData) {
+            if (snapshot.hasData && snapshot.data!.isNotEmpty) {
               final allLevels = snapshot.data!.reversed.toList();
               return Stack(children: [
                 const Padding(
@@ -37,28 +37,52 @@ class _LevelsScreenState extends State<LevelsScreen> {
                     ),
                   ),
                 ),
-                GridView.builder(
-                  itemCount: allLevels.length,
-                  itemBuilder: ((context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(25.0),
-                      child: AnimatedButton(
-                        onPressed: () => GoRouter.of(context)
-                            .go('/gamescreen', extra: allLevels[index].id),
-                        height: 50,
-                        width: 85,
-                        enabled: true,
-                        shadowDegree: ShadowDegree.light,
-                        child: Text(
-                          'Level ${index + 1}',
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    );
-                  }),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    mainAxisExtent: 150,
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 100.0,
+                    bottom: 70.0,
+                  ),
+                  child: GridView.builder(
+                    itemCount: allLevels.length,
+                    itemBuilder: ((context, index) {
+                      return Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: AnimatedButton(
+                              onPressed: () => GoRouter.of(context).go(
+                                  '/gamescreen',
+                                  extra: allLevels[index].id),
+                              height: 50,
+                              width: 85,
+                              enabled: true,
+                              shadowDegree: ShadowDegree.light,
+                              child: Text(
+                                'Level ${index + 1}',
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          AnimatedButton(
+                            onPressed: () => deleteLevel(allLevels[index].id),
+                            height: 40,
+                            width: 60,
+                            enabled: true,
+                            shadowDegree: ShadowDegree.light,
+                            child: const Text(
+                              'DELETE',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 10),
+                            ),
+                          ),
+                        ],
+                      );
+                    }),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      mainAxisExtent: 130,
+                    ),
                   ),
                 ),
                 Padding(
