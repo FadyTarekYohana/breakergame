@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:breakergame/widgets/backbutton.dart';
 import 'package:breakergame/widgets/ball.dart';
@@ -9,6 +10,7 @@ import 'package:breakergame/widgets/level_complete.dart';
 import 'package:breakergame/widgets/player.dart';
 import 'package:breakergame/widgets/game_start.dart';
 import 'package:breakergame/data/levels_repository.dart';
+import 'package:breakergame/widgets/powerups/increase_size.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -41,6 +43,10 @@ class _GameScreenState extends State<GameScreen> {
   double ballXmovement = 0.01;
   double ballYmovement = 0.01;
 
+  double powerUpX = 0;
+  double powerUpY = 0;
+  bool dropPowerUp = false;
+
   var ballXDirection = direction.DOWN;
   var ballYDirection = direction.DOWN;
 
@@ -66,6 +72,7 @@ class _GameScreenState extends State<GameScreen> {
       timer = Timer.periodic(const Duration(milliseconds: 10), (timer) {
         updateDirection();
         moveBall();
+        movePowerUp();
         if (isPlayerDead()) {
           timer.cancel();
           isGameOver = true;
@@ -122,6 +129,17 @@ class _GameScreenState extends State<GameScreen> {
     }
   }
 
+  void checkPowerUp(double x, double y) {
+    var chance = Random().nextInt(100);
+    if (chance > 25) {
+      setState(() {
+        dropPowerUp = true;
+        powerUpX = x;
+        powerUpY = y;
+      });
+    }
+  }
+
   void checkForBrokenBricks() {
     for (int i = 0; i < bricksx.length; i++) {
       if (ballX >= bricksx[i] &&
@@ -129,6 +147,7 @@ class _GameScreenState extends State<GameScreen> {
           ballY >= bricksy[i] &&
           ballY <= bricksy[i] + brickHeight &&
           broken[i] == false) {
+        if (!dropPowerUp) checkPowerUp(bricksx[i], bricksy[i]);
         setState(() {
           broken[i] = true;
           double leftSideDist = (bricksx[i] - ballX).abs();
@@ -218,6 +237,25 @@ class _GameScreenState extends State<GameScreen> {
     });
   }
 
+  void movePowerUp() {
+    setState(() {
+      if (dropPowerUp) {
+        powerUpY += 0.005;
+      }
+      if (powerUpY >= 1) {
+        dropPowerUp = false;
+      }
+      if (powerUpY >= 0.9 &&
+          powerUpX >= playerX &&
+          powerUpX <= playerX + playerWidth) {
+        dropPowerUp = false;
+        powerUpX = 0;
+        powerUpY = 0;
+        if (playerWidth <= 1.1) playerWidth *= 1.5;
+      }
+    });
+  }
+
   void moveBall() {
     setState(() {
       if (ballXDirection == direction.LEFT) {
@@ -260,6 +298,7 @@ class _GameScreenState extends State<GameScreen> {
   void resetGame() {
     setState(() {
       broken = List.filled(bricksx.length, false);
+      dropPowerUp = false;
       ballX = 0;
       ballY = 0;
       isGameOver = false;
@@ -313,6 +352,7 @@ class _GameScreenState extends State<GameScreen> {
                 ),
               ),
               LevelCompleteScreen(isLevelComplete: levelComplete),
+              IncreaseSize(powerUpX, powerUpY, dropPowerUp),
               GameStartScreen(hasGameStarted: hasGameStarted),
               GameOverScreen(
                 isGameOver: isGameOver,
