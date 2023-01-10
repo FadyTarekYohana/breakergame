@@ -26,12 +26,6 @@ class GameScreen extends StatefulWidget {
 enum direction { UP, DOWN, LEFT, RIGHT }
 
 class _GameScreenState extends State<GameScreen> {
-  final List<List<double>> levelbarriers = [
-    [-0.325, -0.38]
-  ];
-  final List<List<double>> levelbricks = [
-    [-0.65, -0.62]
-  ];
   List<dynamic> bricksx = [],
       bricksy = [],
       barriersx = [],
@@ -40,8 +34,8 @@ class _GameScreenState extends State<GameScreen> {
 
   double ballX = 0;
   double ballY = 0;
-  double ballXmovement = 0.01;
-  double ballYmovement = 0.01;
+  double ballXmovement = 0.02;
+  double ballYmovement = 0.02;
 
   double powerUpX = 0;
   double powerUpY = 0;
