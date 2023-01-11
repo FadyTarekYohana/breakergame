@@ -46,15 +46,15 @@ class ShopScreen extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
+                    child: ShopItem(Colors.white),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: ShopItem(Colors.black),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ShopItem(Colors.grey),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ShopItem(Colors.white),
                   ),
                 ],
               ),
@@ -64,15 +64,15 @@ class ShopScreen extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
+                  child: ShopItem(Colors.amber),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: ShopItem(Colors.deepOrange),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ShopItem(Colors.orange),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ShopItem(Colors.amber),
                 ),
               ],
             ),
@@ -81,15 +81,15 @@ class ShopScreen extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
+                  child: ShopItem(Colors.cyan),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: ShopItem(Colors.purple),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ShopItem(Colors.pink),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ShopItem(Colors.cyan),
                 ),
               ],
             ),
