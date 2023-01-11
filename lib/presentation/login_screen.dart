@@ -64,7 +64,7 @@ class _LoginState extends State<Login> {
                   ),
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Please enter your email!';
+                      return 'Please enter your email';
                     } else {
                       return null;
                     }
@@ -90,7 +90,7 @@ class _LoginState extends State<Login> {
                   ),
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Please enter your password!';
+                      return 'Please enter your password';
                     } else {
                       return null;
                     }
