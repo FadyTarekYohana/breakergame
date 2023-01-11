@@ -33,7 +33,6 @@ dependencies:
     sdk: flutter
   google_fonts: ^3.0.1
   http: ^0.13.5
-  flute_music_player: ^0.0.6
   
 
   # The following adds the Cupertino Icons font to your application.
