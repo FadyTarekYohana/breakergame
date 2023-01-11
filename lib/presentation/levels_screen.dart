@@ -50,14 +50,14 @@ class _LevelsScreenState extends State<LevelsScreen> {
                     alignment: Alignment.topCenter,
                     child: Text(
                       "LEVELS",
-                      style: TextStyle(color: Colors.white, fontSize: 30),
+                      style: TextStyle(color: Colors.white, fontSize: 35),
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                    top: 100.0,
-                    bottom: 70.0,
+                    top: 120.0,
+                    bottom: 60.0,
                   ),
                   child: GridView.builder(
                     itemCount: allLevels.length,
@@ -70,13 +70,14 @@ class _LevelsScreenState extends State<LevelsScreen> {
                               onPressed: () => GoRouter.of(context).go(
                                   '/gamescreen',
                                   extra: allLevels[index].id),
-                              height: 50,
-                              width: 85,
+                              height: 60,
+                              width: 75,
                               enabled: true,
-                              shadowDegree: ShadowDegree.light,
+                              shadowDegree: ShadowDegree.dark,
                               child: Text(
                                 'Level ${index + 1}',
-                                style: const TextStyle(color: Colors.white),
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 15),
                               ),
                             ),
                           ),
@@ -84,14 +85,14 @@ class _LevelsScreenState extends State<LevelsScreen> {
                             visible: isAdmin,
                             child: AnimatedButton(
                               onPressed: () => deleteLevel(allLevels[index].id),
-                              height: 40,
-                              width: 60,
+                              height: 35,
+                              width: 55,
                               enabled: true,
-                              shadowDegree: ShadowDegree.light,
+                              shadowDegree: ShadowDegree.dark,
                               child: const Text(
                                 'DELETE',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 10),
+                                style:
+                                    TextStyle(color: Colors.white, fontSize: 8),
                               ),
                             ),
                           ),
@@ -101,7 +102,7 @@ class _LevelsScreenState extends State<LevelsScreen> {
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
-                      mainAxisExtent: 130,
+                      mainAxisExtent: 150,
                     ),
                   ),
                 ),

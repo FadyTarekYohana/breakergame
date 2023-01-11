@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
                   shadows: [
                     Shadow(
                       color: Colors.red,
-                      offset: Offset(3.5, 3.5),
+                      offset: Offset(3.4, 3.4),
                     ),
                   ],
                   color: Colors.white,
@@ -37,14 +37,14 @@ class HomePage extends StatelessWidget {
               child: Text(
                 'PLAY',
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 20,
                   color: Colors.white,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               onPressed: () => GoRouter.of(context).go('/levels'),
               enabled: true,
-              shadowDegree: ShadowDegree.light,
+              shadowDegree: ShadowDegree.dark,
             ),
           ),
           Padding(
@@ -53,14 +53,14 @@ class HomePage extends StatelessWidget {
               child: Text(
                 'SHOP',
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 20,
                   color: Colors.white,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               onPressed: () => GoRouter.of(context).go('/shopscreen'),
               enabled: true,
-              shadowDegree: ShadowDegree.light,
+              shadowDegree: ShadowDegree.dark,
             ),
           ),
           Padding(
@@ -69,14 +69,14 @@ class HomePage extends StatelessWidget {
               child: Text(
                 'OPTIONS',
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 20,
                   color: Colors.white,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               onPressed: () => GoRouter.of(context).go('/optionsscreen'),
               enabled: true,
-              shadowDegree: ShadowDegree.light,
+              shadowDegree: ShadowDegree.dark,
             ),
           ),
           Padding(
@@ -85,14 +85,14 @@ class HomePage extends StatelessWidget {
               child: Text(
                 'CREDITS',
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 20,
                   color: Colors.white,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               onPressed: () => GoRouter.of(context).go('/creditsscreen'),
               enabled: true,
-              shadowDegree: ShadowDegree.light,
+              shadowDegree: ShadowDegree.dark,
             ),
           ),
         ],

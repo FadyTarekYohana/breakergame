@@ -92,11 +92,11 @@ class _OptionsScreenState extends State<OptionsScreen> {
                         loadCode();
                       },
                       enabled: true,
-                      shadowDegree: ShadowDegree.light,
+                      shadowDegree: ShadowDegree.dark,
                       child: const Text(
                         'CHANGE CODE',
                         style: TextStyle(
-                          fontSize: 22,
+                          fontSize: 20,
                           color: Colors.white,
                           fontWeight: FontWeight.w500,
                         ),
@@ -116,7 +116,7 @@ class _OptionsScreenState extends State<OptionsScreen> {
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 30),
+                        fontSize: 20),
                   ),
                 ),
                 Switch(
@@ -141,7 +141,7 @@ class _OptionsScreenState extends State<OptionsScreen> {
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 30),
+                        fontSize: 20),
                   ),
                 ),
                 Switch(
@@ -164,11 +164,11 @@ class _OptionsScreenState extends State<OptionsScreen> {
                   GoRouter.of(context).go('/');
                 },
                 enabled: true,
-                shadowDegree: ShadowDegree.light,
+                shadowDegree: ShadowDegree.dark,
                 child: const Text(
                   'LOG OUT',
                   style: TextStyle(
-                    fontSize: 22,
+                    fontSize: 20,
                     color: Colors.white,
                     fontWeight: FontWeight.w500,
                   ),

@@ -36,16 +36,6 @@ class CreditsScreen extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.all(15.0),
               child: Text(
-                "HADY HANY",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30),
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(15.0),
-              child: Text(
                 "ALYELDIN KHAIRY",
                 style: TextStyle(
                     color: Colors.white,
@@ -56,7 +46,17 @@ class CreditsScreen extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.all(15.0),
               child: Text(
-                "AHMED MOHAMED",
+                "AHMED HAMOUDA",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.all(15.0),
+              child: Text(
+                "HADY HANY",
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,

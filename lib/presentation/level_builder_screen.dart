@@ -61,12 +61,12 @@ class _LevelBuilderState extends State<LevelBuilder> {
             const Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
-                "CHOOSE 0 TO LEAVE AN EMPTY SPACE OR 1 FOR A BRICK OR 2 FOR A BARRIER",
+                "CHOOSE 0 FOR NOT ADDING A BRICK OR 1 FOR A BRICK OR 2 FOR A BARRIER",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 15),
+                    fontSize: 12),
               ),
             ),
             for (double i = -0.78; i < -0.08; i += 0.08)
@@ -90,7 +90,7 @@ class _LevelBuilderState extends State<LevelBuilder> {
                             child: Text(
                               items,
                               style: const TextStyle(
-                                  fontSize: 15, color: Colors.white),
+                                  fontSize: 12, color: Colors.white),
                             ),
                           );
                         }).toList(),
@@ -127,7 +127,7 @@ class _LevelBuilderState extends State<LevelBuilder> {
                   child: Text(
                     'SAVE',
                     style: TextStyle(
-                      fontSize: 22,
+                      fontSize: 15,
                       color: Colors.white,
                       fontWeight: FontWeight.w500,
                     ),

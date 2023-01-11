@@ -34,8 +34,8 @@ class _GameScreenState extends State<GameScreen> {
 
   double ballX = 0;
   double ballY = 0;
-  double ballXmovement = 0.02;
-  double ballYmovement = 0.02;
+  double ballXmovement = 0.01;
+  double ballYmovement = 0.01;
 
   double powerUpX = 0;
   double powerUpY = 0;
@@ -50,7 +50,7 @@ class _GameScreenState extends State<GameScreen> {
   double barrierWidth = 0.25;
   double barrierHeight = 0.05;
 
-  double playerWidth = 0.3;
+  double playerWidth = 0.4;
   double playerX = -0.15;
 
   late Timer timer;
