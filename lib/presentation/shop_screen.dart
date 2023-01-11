@@ -95,7 +95,7 @@ class ShopScreen extends StatelessWidget {
             ),
             Padding(
                 padding: const EdgeInsets.only(top: 50),
-                child: Back('/homepage')),
+                child: Back('/Homepage')),
           ])),
     );
   }
