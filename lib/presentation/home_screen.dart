@@ -37,7 +37,10 @@ class HomePage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(5.0),
             child: AnimatedButton(
-              child: Text(
+              onPressed: () => GoRouter.of(context).go('/levels'),
+              enabled: true,
+              shadowDegree: ShadowDegree.dark,
+              child: const Text(
                 'PLAY',
                 style: TextStyle(
                   fontSize: 20,
@@ -45,15 +48,15 @@ class HomePage extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              onPressed: () => GoRouter.of(context).go('/levels'),
-              enabled: true,
-              shadowDegree: ShadowDegree.dark,
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(5.0),
             child: AnimatedButton(
-              child: Text(
+              onPressed: () => GoRouter.of(context).go('/shopscreen'),
+              enabled: true,
+              shadowDegree: ShadowDegree.dark,
+              child: const Text(
                 'SHOP',
                 style: TextStyle(
                   fontSize: 20,
@@ -61,15 +64,15 @@ class HomePage extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              onPressed: () => GoRouter.of(context).go('/shopscreen'),
-              enabled: true,
-              shadowDegree: ShadowDegree.dark,
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(5.0),
             child: AnimatedButton(
-              child: Text(
+              onPressed: () => GoRouter.of(context).go('/optionsscreen'),
+              enabled: true,
+              shadowDegree: ShadowDegree.dark,
+              child: const Text(
                 'OPTIONS',
                 style: TextStyle(
                   fontSize: 20,
@@ -77,15 +80,15 @@ class HomePage extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              onPressed: () => GoRouter.of(context).go('/optionsscreen'),
-              enabled: true,
-              shadowDegree: ShadowDegree.dark,
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(5.0),
             child: AnimatedButton(
-              child: Text(
+              onPressed: () => GoRouter.of(context).go('/creditsscreen'),
+              enabled: true,
+              shadowDegree: ShadowDegree.dark,
+              child: const Text(
                 'CREDITS',
                 style: TextStyle(
                   fontSize: 20,
@@ -93,30 +96,12 @@ class HomePage extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              onPressed: () => GoRouter.of(context).go('/creditsscreen'),
-              enabled: true,
-              shadowDegree: ShadowDegree.dark,
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(5.0),
             child: AnimatedButton(
-                child: Text(
-                  'LogOut',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                onPressed: () {
-                  FirebaseAuth.instance.signOut();
-                }),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: AnimatedButton(
-                child: Text(
+                child: const Text(
                   'music',
                   style: TextStyle(
                     fontSize: 20,

@@ -25,7 +25,12 @@ class ShopItem extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(5.0),
           child: AnimatedButton(
-            child: Text(
+            onPressed: () {},
+            width: 70,
+            height: 40,
+            enabled: true,
+            shadowDegree: ShadowDegree.light,
+            child: const Text(
               'BUY',
               style: TextStyle(
                 fontSize: 15,
@@ -33,11 +38,6 @@ class ShopItem extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            onPressed: () {},
-            width: 70,
-            height: 40,
-            enabled: true,
-            shadowDegree: ShadowDegree.light,
           ),
         ),
       ],
