@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
+import 'package:audioplayers/audioplayers.dart';
 import '../../widgets/animatedbutton.dart';
 
 class HomePage extends StatelessWidget {
@@ -94,6 +97,36 @@ class HomePage extends StatelessWidget {
               enabled: true,
               shadowDegree: ShadowDegree.dark,
             ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: AnimatedButton(
+                child: Text(
+                  'LogOut',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                onPressed: () {
+                  FirebaseAuth.instance.signOut();
+                }),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: AnimatedButton(
+                child: Text(
+                  'music',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                onPressed: () {
+                  FlameAudio.play('assets/audio/audio.mp3');
+                }),
           ),
         ],
       )),
