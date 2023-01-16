@@ -144,7 +144,7 @@ class _LevelBuilderState extends State<LevelBuilder> {
                   width: 80,
                   height: 50,
                   enabled: true,
-                  shadowDegree: ShadowDegree.light,
+                  shadowDegree: ShadowDegree.dark,
                 ),
               ],
             )

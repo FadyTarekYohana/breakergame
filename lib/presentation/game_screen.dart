@@ -380,7 +380,7 @@ class _GameScreenState extends State<GameScreen> {
                   width: 50,
                   height: 50,
                   enabled: true,
-                  shadowDegree: ShadowDegree.light,
+                  shadowDegree: ShadowDegree.dark,
                 ),
               ),
               LevelCompleteScreen(isLevelComplete: levelComplete),

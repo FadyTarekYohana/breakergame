@@ -29,7 +29,7 @@ class ShopItem extends StatelessWidget {
             width: 70,
             height: 40,
             enabled: true,
-            shadowDegree: ShadowDegree.light,
+            shadowDegree: ShadowDegree.dark,
             child: const Text(
               'BUY',
               style: TextStyle(

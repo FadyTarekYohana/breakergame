@@ -18,7 +18,7 @@ class Back extends StatelessWidget {
         width: 50,
         height: 50,
         enabled: true,
-        shadowDegree: ShadowDegree.light,
+        shadowDegree: ShadowDegree.dark,
       ),
     );
   }

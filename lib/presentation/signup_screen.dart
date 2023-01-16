@@ -156,7 +156,7 @@ class _SignUpState extends State<SignUp> {
                   }
                 },
                 enabled: true,
-                shadowDegree: ShadowDegree.light,
+                shadowDegree: ShadowDegree.dark,
                 child: const Text(
                   'SIGN UP',
                   style: TextStyle(
