@@ -20,7 +20,7 @@ class CreditsScreen extends StatelessWidget {
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 35),
+                    fontSize: 30),
               ),
             ),
             const Padding(
@@ -30,7 +30,7 @@ class CreditsScreen extends StatelessWidget {
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 35),
+                    fontSize: 30),
               ),
             ),
             const Padding(
@@ -40,7 +40,7 @@ class CreditsScreen extends StatelessWidget {
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 35),
+                    fontSize: 30),
               ),
             ),
             const Padding(
@@ -50,7 +50,7 @@ class CreditsScreen extends StatelessWidget {
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 35),
+                    fontSize: 30),
               ),
             ),
             const Padding(
@@ -60,7 +60,7 @@ class CreditsScreen extends StatelessWidget {
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 35),
+                    fontSize: 30),
               ),
             ),
             Padding(
