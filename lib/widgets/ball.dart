@@ -4,7 +4,10 @@ class myball extends StatelessWidget {
   final bx;
   final by;
 
-  myball(this.bx, this.by);
+  myball(
+    this.bx,
+    this.by,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +17,7 @@ class myball extends StatelessWidget {
         height: 15,
         width: 15,
         decoration: const BoxDecoration(
-          color: Colors.white,
+          color: Colors.red,
           shape: BoxShape.circle,
         ),
       ),
