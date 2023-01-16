@@ -13,7 +13,7 @@ class GameOverScreen extends StatelessWidget {
       textStyle:
           TextStyle(color: Colors.white, letterSpacing: 0, fontSize: 28));
 
-  GameOverScreen({super.key, required this.isGameOver, this.function});
+  const GameOverScreen({super.key, required this.isGameOver, this.function});
 
   @override
   Widget build(BuildContext context) {
