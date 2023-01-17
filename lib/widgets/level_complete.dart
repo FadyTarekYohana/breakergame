@@ -12,8 +12,8 @@ class LevelCompleteScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return isLevelComplete
         ? Container(
-            alignment: Alignment(0, -0.3),
-            child: Text("LEVEL COMPLETED!",
+            alignment: const Alignment(0, -0.3),
+            child: const Text("LEVEL COMPLETED!",
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
