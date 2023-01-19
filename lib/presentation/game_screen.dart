@@ -51,6 +51,7 @@ class _GameScreenState extends State<GameScreen> {
 
   double brickWidth = 0.25;
   double brickHeight = 0.05;
+  final Customcolor = Colors.red;
 
   double barrierWidth = 0.25;
   double barrierHeight = 0.05;
@@ -380,7 +381,7 @@ class _GameScreenState extends State<GameScreen> {
                   width: 50,
                   height: 50,
                   enabled: true,
-                  shadowDegree: ShadowDegree.light,
+                  shadowDegree: ShadowDegree.dark,
                 ),
               ),
               LevelCompleteScreen(isLevelComplete: levelComplete),
@@ -393,7 +394,13 @@ class _GameScreenState extends State<GameScreen> {
               ),
               for (int i = 0; i < bricksx.length; i++)
                 Brick(
-                    brickWidth, brickHeight, bricksx[i], bricksy[i], broken[i]),
+                  brickWidth,
+                  brickHeight,
+                  bricksx[i],
+                  bricksy[i],
+                  broken[i],
+                  Customcolor,
+                ),
               for (int i = 0; i < barriersx.length; i++)
                 Barrier(
                     barrierWidth, barrierHeight, barriersx[i], barriersy[i]),

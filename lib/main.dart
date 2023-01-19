@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   void initState() {
     PushNotificationApi.init();
-
+    
     PushNotificationApi.SchduledNotification(
       title: 'BRICKBREAKER GAME',
       body: 'today',

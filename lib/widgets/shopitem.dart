@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'animatedbutton.dart';
 
 class ShopItem extends StatelessWidget {
-  final color;
+  final shopcolor;
 
-  ShopItem(this.color);
+  ShopItem(this.shopcolor);
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +14,9 @@ class ShopItem extends StatelessWidget {
         Container(
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(0)),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(20),
             child: Container(
-              color: color,
+              color: shopcolor,
               width: 70,
               height: 50,
             ),
@@ -29,7 +29,7 @@ class ShopItem extends StatelessWidget {
             width: 70,
             height: 40,
             enabled: true,
-            shadowDegree: ShadowDegree.light,
+            shadowDegree: ShadowDegree.dark,
             child: const Text(
               'BUY',
               style: TextStyle(

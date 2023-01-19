@@ -18,7 +18,7 @@ class AnimatedButton extends StatefulWidget {
       this.enabled = true,
       this.color = Colors.red,
       this.height = 64,
-      this.shadowDegree = ShadowDegree.light,
+      this.shadowDegree = ShadowDegree.dark,
       this.width = 200,
       this.duration = 70,
       this.shape = BoxShape.rectangle})

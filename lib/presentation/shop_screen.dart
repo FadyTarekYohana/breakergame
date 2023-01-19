@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:breakergame/widgets/shopitem.dart';
 import 'package:breakergame/widgets/backbutton.dart';
 
+import '../widgets/animatedbutton.dart';
+
 class ShopScreen extends StatelessWidget {
   const ShopScreen({Key? key}) : super(key: key);
 
@@ -93,6 +95,26 @@ class ShopScreen extends StatelessWidget {
                 ),
               ],
             ),
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: AnimatedButton(
+                  onPressed: () {},
+                  width: 70,
+                  height: 40,
+                  enabled: true,
+                  shadowDegree: ShadowDegree.dark,
+                  child: const Text(
+                    'BUY',
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ),
+            ]),
             Padding(
                 padding: const EdgeInsets.only(top: 50),
                 child: Back('/homepage')),

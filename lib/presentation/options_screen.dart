@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:breakergame/widgets/backbutton.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 import '../../widgets/animatedbutton.dart';
 import '../widgets/quote_of_the_day.dart';
@@ -16,8 +17,7 @@ class OptionsScreen extends StatefulWidget {
 
 class _OptionsScreenState extends State<OptionsScreen> {
   TextEditingController adminCodeController = TextEditingController();
-
-  bool sound = true;
+  final player = AudioPlayer();
   bool music = true;
   bool isAdmin = false;
   var code = '';
@@ -112,31 +112,6 @@ class _OptionsScreenState extends State<OptionsScreen> {
                 const Padding(
                   padding: EdgeInsets.all(15.0),
                   child: Text(
-                    "SOUND",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),
-                  ),
-                ),
-                Switch(
-                  value: sound,
-                  onChanged: (value) {
-                    setState(() {
-                      sound = value;
-                    });
-                  },
-                  activeTrackColor: const Color.fromARGB(255, 126, 25, 18),
-                  activeColor: const Color.fromARGB(255, 255, 0, 0),
-                )
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.all(15.0),
-                  child: Text(
                     "MUSIC",
                     style: TextStyle(
                         color: Colors.white,
@@ -149,6 +124,11 @@ class _OptionsScreenState extends State<OptionsScreen> {
                   onChanged: (value) {
                     setState(() {
                       music = value;
+                      if (music == true) {
+                        player.play(AssetSource('audio/audio.mp3'));
+                      } else {
+                        player.stop();
+                      }
                     });
                   },
                   activeTrackColor: const Color.fromARGB(255, 126, 25, 18),
