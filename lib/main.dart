@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:breakergame/routing/routes.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'api/push_notifications.dart';
 
 void main() async {
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   void initState() {
     PushNotificationApi.init();
-    
+
     PushNotificationApi.SchduledNotification(
       title: 'BRICKBREAKER GAME',
       body: 'today',
