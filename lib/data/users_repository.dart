@@ -4,8 +4,12 @@ import 'package:firebase_auth/firebase_auth.dart' show FirebaseAuth;
 
 void createUser(String type, String email, String id) async {
   final docUsers = FirebaseFirestore.instance.collection('users').doc(id);
-  final user =
-      User(id: id, type: type, coins: 0, email: email, colors: ["grey"]);
+  final user = User(
+      id: id,
+      type: type,
+      coins: 0,
+      email: email,
+      colors: ["MaterialColor(primary value: Color(0xff9e9e9e))"]);
   final json = user.toJson();
   await docUsers.set(json);
 }

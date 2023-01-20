@@ -1,16 +1,40 @@
+import 'package:breakergame/data/colors_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:breakergame/widgets/shopitem.dart';
 import 'package:breakergame/widgets/backbutton.dart';
+import 'package:breakergame/data/users_repository.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../widgets/animatedbutton.dart';
-
-class ShopScreen extends StatelessWidget {
+class ShopScreen extends ConsumerStatefulWidget {
   const ShopScreen({Key? key}) : super(key: key);
 
   @override
+  ShopScreenState createState() => ShopScreenState();
+}
+
+class ShopScreenState extends ConsumerState<ShopScreen> {
+  late List<dynamic> colors;
+
+  loadColors() async {
+    var user = await getUser();
+    setState(() {
+      colors = user["colors"];
+      ref.read(colorsProvider.notifier).state = colors;
+    });
+  }
+
+  @override
+  void initState() {
+    loadColors();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final colors = ref.watch(colorsProvider);
+
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Color.fromARGB(0, 223, 59, 59),
       body: Center(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -48,15 +72,24 @@ class ShopScreen extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: ShopItem(Colors.black),
+                    child: ShopItem(
+                      Colors.black,
+                      colors.contains(Colors.black.toString()),
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: ShopItem(Colors.grey),
+                    child: ShopItem(
+                      Colors.grey,
+                      colors.contains(Colors.grey.toString()),
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: ShopItem(Colors.white),
+                    child: ShopItem(
+                      Colors.white,
+                      colors.contains(Colors.white.toString()),
+                    ),
                   ),
                 ],
               ),
@@ -66,15 +99,24 @@ class ShopScreen extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ShopItem(Colors.deepOrange),
+                  child: ShopItem(
+                    Colors.deepOrange,
+                    colors.contains(Colors.deepOrange.toString()),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ShopItem(Colors.orange),
+                  child: ShopItem(
+                    Colors.orange,
+                    colors.contains(Colors.orange.toString()),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ShopItem(Colors.amber),
+                  child: ShopItem(
+                    Colors.amber,
+                    colors.contains(Colors.amber.toString()),
+                  ),
                 ),
               ],
             ),
@@ -83,38 +125,27 @@ class ShopScreen extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ShopItem(Colors.purple),
+                  child: ShopItem(
+                    Colors.purple,
+                    colors.contains(Colors.purple.toString()),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ShopItem(Colors.pink),
+                  child: ShopItem(
+                    Colors.pink,
+                    colors.contains(Colors.pink.toString()),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ShopItem(Colors.cyan),
+                  child: ShopItem(
+                    Colors.cyan,
+                    colors.contains(Colors.cyan.toString()),
+                  ),
                 ),
               ],
             ),
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: AnimatedButton(
-                  onPressed: () {},
-                  width: 70,
-                  height: 40,
-                  enabled: true,
-                  shadowDegree: ShadowDegree.dark,
-                  child: const Text(
-                    'BUY',
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ),
-            ]),
             Padding(
                 padding: const EdgeInsets.only(top: 50),
                 child: Back('/homepage')),
