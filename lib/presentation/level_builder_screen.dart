@@ -124,14 +124,6 @@ class _LevelBuilderState extends State<LevelBuilder> {
                     padding: const EdgeInsets.all(20.0),
                     child: Back('/levels')),
                 AnimatedButton(
-                  child: Text(
-                    'SAVE',
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
                   onPressed: () {
                     if (barriers.isNotEmpty || bricks.isNotEmpty) {
                       createLevel(bricks, barriers);
@@ -145,6 +137,14 @@ class _LevelBuilderState extends State<LevelBuilder> {
                   height: 50,
                   enabled: true,
                   shadowDegree: ShadowDegree.dark,
+                  child: const Text(
+                    'SAVE',
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                 ),
               ],
             )
