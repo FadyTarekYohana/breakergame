@@ -1,23 +1,18 @@
+import 'package:breakergame/data/coins_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/colors_repository.dart';
-import '../data/users_repository.dart';
-import '../presentation/shop_screen.dart';
 import 'animatedbutton.dart';
 
-class ShopItem extends ConsumerStatefulWidget {
+class ShopItem extends ConsumerWidget {
   final shopcolor;
   final bought;
+  final int price;
 
-  ShopItem(this.shopcolor, this.bought);
+  ShopItem(this.shopcolor, this.bought, this.price);
 
   @override
-  ShopItemState createState() => ShopItemState();
-}
-
-class ShopItemState extends ConsumerState<ShopItem> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
         Container(
@@ -25,7 +20,7 @@ class ShopItemState extends ConsumerState<ShopItem> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Container(
-              color: widget.shopcolor,
+              color: shopcolor,
               width: 70,
               height: 50,
             ),
@@ -34,13 +29,18 @@ class ShopItemState extends ConsumerState<ShopItem> {
         Padding(
           padding: const EdgeInsets.all(5.0),
           child: Visibility(
-            visible: widget.bought,
+            visible: bought,
             replacement: AnimatedButton(
               onPressed: () {
-                ref
-                    .read(colorsProvider.notifier)
-                    .addToColors(widget.shopcolor.toString());
-                setColors(ref.read(colorsProvider));
+                if (ref.read(coinsProvider) >= price) {
+                  ref.read(coinsProvider.notifier).buy(price);
+                  print(ref.read(coinsProvider));
+                  setCoins(ref.read(coinsProvider));
+                  ref
+                      .read(colorsProvider.notifier)
+                      .addToColors(shopcolor.toString());
+                  setColors(ref.read(colorsProvider));
+                }
               },
               width: 70,
               height: 40,

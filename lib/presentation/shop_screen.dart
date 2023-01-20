@@ -1,3 +1,4 @@
+import 'package:breakergame/data/coins_repository.dart';
 import 'package:breakergame/data/colors_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:breakergame/widgets/shopitem.dart';
@@ -13,28 +14,32 @@ class ShopScreen extends ConsumerStatefulWidget {
 }
 
 class ShopScreenState extends ConsumerState<ShopScreen> {
-  late List<dynamic> colors;
+  List<dynamic> colors = [];
+  int coins = 0;
 
-  loadColors() async {
+  loadData() async {
     var user = await getUser();
     setState(() {
       colors = user["colors"];
+      coins = user["coins"];
+      ref.read(coinsProvider.notifier).state = coins;
       ref.read(colorsProvider.notifier).state = colors;
     });
   }
 
   @override
   void initState() {
-    loadColors();
+    loadData();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final colors = ref.watch(colorsProvider);
+    final coins = ref.watch(coinsProvider);
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(0, 223, 59, 59),
+      backgroundColor: const Color.fromARGB(0, 223, 59, 59),
       body: Center(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -42,8 +47,8 @@ class ShopScreenState extends ConsumerState<ShopScreen> {
               children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Padding(
+              children: [
+                const Padding(
                   padding: EdgeInsets.all(50.0),
                   child: Text(
                     "SHOP",
@@ -54,10 +59,10 @@ class ShopScreenState extends ConsumerState<ShopScreen> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(50.0),
+                  padding: const EdgeInsets.all(50.0),
                   child: Text(
-                    "COINS: 0",
-                    style: TextStyle(
+                    "COINS: $coins",
+                    style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 20),
@@ -72,24 +77,18 @@ class ShopScreenState extends ConsumerState<ShopScreen> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: ShopItem(
-                      Colors.black,
-                      colors.contains(Colors.black.toString()),
-                    ),
+                    child: ShopItem(Colors.black,
+                        colors.contains(Colors.black.toString()), 20),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: ShopItem(
-                      Colors.grey,
-                      colors.contains(Colors.grey.toString()),
-                    ),
+                    child: ShopItem(Colors.grey,
+                        colors.contains(Colors.grey.toString()), 20),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: ShopItem(
-                      Colors.white,
-                      colors.contains(Colors.white.toString()),
-                    ),
+                    child: ShopItem(Colors.white,
+                        colors.contains(Colors.white.toString()), 20),
                   ),
                 ],
               ),
@@ -99,24 +98,18 @@ class ShopScreenState extends ConsumerState<ShopScreen> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ShopItem(
-                    Colors.deepOrange,
-                    colors.contains(Colors.deepOrange.toString()),
-                  ),
+                  child: ShopItem(Colors.deepOrange,
+                      colors.contains(Colors.deepOrange.toString()), 20),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ShopItem(
-                    Colors.orange,
-                    colors.contains(Colors.orange.toString()),
-                  ),
+                  child: ShopItem(Colors.orange,
+                      colors.contains(Colors.orange.toString()), 20),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ShopItem(
-                    Colors.amber,
-                    colors.contains(Colors.amber.toString()),
-                  ),
+                  child: ShopItem(Colors.amber,
+                      colors.contains(Colors.amber.toString()), 20),
                 ),
               ],
             ),
@@ -125,26 +118,27 @@ class ShopScreenState extends ConsumerState<ShopScreen> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ShopItem(
-                    Colors.purple,
-                    colors.contains(Colors.purple.toString()),
-                  ),
+                  child: ShopItem(Colors.purple,
+                      colors.contains(Colors.purple.toString()), 20),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ShopItem(
-                    Colors.pink,
-                    colors.contains(Colors.pink.toString()),
-                  ),
+                      Colors.pink, colors.contains(Colors.pink.toString()), 20),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ShopItem(
-                    Colors.cyan,
-                    colors.contains(Colors.cyan.toString()),
-                  ),
+                      Colors.cyan, colors.contains(Colors.cyan.toString()), 20),
                 ),
               ],
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 10.0),
+              child: Text(
+                "BUY A COLOR FOR 20 COINS",
+                style: TextStyle(color: Colors.white, fontSize: 16),
+              ),
             ),
             Padding(
                 padding: const EdgeInsets.only(top: 50),
