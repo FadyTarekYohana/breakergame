@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:breakergame/data/coins_repository.dart';
 import 'package:breakergame/widgets/backbutton.dart';
 import 'package:breakergame/widgets/ball.dart';
 import 'package:breakergame/widgets/barrier.dart';
@@ -12,21 +13,22 @@ import 'package:breakergame/widgets/game_start.dart';
 import 'package:breakergame/data/levels_repository.dart';
 import 'package:breakergame/widgets/powerups/increase_size.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../widgets/animatedbutton.dart';
 import '../widgets/powerups/decrease_size.dart';
 
-class GameScreen extends StatefulWidget {
+class GameScreen extends ConsumerStatefulWidget {
   final String level;
   const GameScreen({Key? key, required this.level}) : super(key: key);
   @override
-  _GameScreenState createState() => _GameScreenState();
+  GameScreenState createState() => GameScreenState();
 }
 
 enum direction { UP, DOWN, LEFT, RIGHT }
 
-class _GameScreenState extends State<GameScreen> {
+class GameScreenState extends ConsumerState<GameScreen> {
   List<dynamic> bricksx = [],
       bricksy = [],
       barriersx = [],
@@ -215,7 +217,7 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   bool isPlayerDead() {
-    if (ballY >= 1) {
+    if (ballY >= 0.94) {
       return true;
     }
 
@@ -329,6 +331,10 @@ class _GameScreenState extends State<GameScreen> {
 
   void resetGame() {
     setState(() {
+      if (isLevelComplete()) {
+        ref.watch(coinsProvider.notifier).levelReward(20);
+        setCoins(ref.read(coinsProvider));
+      }
       broken = List.filled(bricksx.length, false);
       dropPowerUp = false;
       dropPowerDown = false;
@@ -384,7 +390,7 @@ class _GameScreenState extends State<GameScreen> {
                   shadowDegree: ShadowDegree.dark,
                 ),
               ),
-              LevelCompleteScreen(isLevelComplete: levelComplete),
+              LevelCompleteScreen(isLevelComplete: levelComplete, resetGame),
               IncreaseSize(powerUpX, powerUpY, dropPowerUp),
               DecreaseSize(powerDownX, powerDownY, dropPowerDown),
               GameStartScreen(hasGameStarted: hasGameStarted),

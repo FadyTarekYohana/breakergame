@@ -34,7 +34,6 @@ class ShopItem extends ConsumerWidget {
               onPressed: () {
                 if (ref.read(coinsProvider) >= price) {
                   ref.read(coinsProvider.notifier).buy(price);
-                  print(ref.read(coinsProvider));
                   setCoins(ref.read(coinsProvider));
                   ref
                       .read(colorsProvider.notifier)

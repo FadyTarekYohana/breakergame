@@ -78,17 +78,17 @@ class ShopScreenState extends ConsumerState<ShopScreen> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ShopItem(Colors.black,
-                        colors.contains(Colors.black.toString()), 20),
+                        colors.contains(Colors.black.toString()), 60),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ShopItem(Colors.grey,
-                        colors.contains(Colors.grey.toString()), 20),
+                        colors.contains(Colors.grey.toString()), 60),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ShopItem(Colors.white,
-                        colors.contains(Colors.white.toString()), 20),
+                        colors.contains(Colors.white.toString()), 60),
                   ),
                 ],
               ),
@@ -99,17 +99,17 @@ class ShopScreenState extends ConsumerState<ShopScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ShopItem(Colors.deepOrange,
-                      colors.contains(Colors.deepOrange.toString()), 20),
+                      colors.contains(Colors.deepOrange.toString()), 60),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ShopItem(Colors.orange,
-                      colors.contains(Colors.orange.toString()), 20),
+                      colors.contains(Colors.orange.toString()), 60),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ShopItem(Colors.amber,
-                      colors.contains(Colors.amber.toString()), 20),
+                      colors.contains(Colors.amber.toString()), 60),
                 ),
               ],
             ),
@@ -119,24 +119,24 @@ class ShopScreenState extends ConsumerState<ShopScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ShopItem(Colors.purple,
-                      colors.contains(Colors.purple.toString()), 20),
+                      colors.contains(Colors.purple.toString()), 60),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ShopItem(
-                      Colors.pink, colors.contains(Colors.pink.toString()), 20),
+                      Colors.pink, colors.contains(Colors.pink.toString()), 60),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ShopItem(
-                      Colors.cyan, colors.contains(Colors.cyan.toString()), 20),
+                      Colors.cyan, colors.contains(Colors.cyan.toString()), 60),
                 ),
               ],
             ),
             const Padding(
               padding: EdgeInsets.only(top: 10.0),
               child: Text(
-                "BUY A COLOR FOR 20 COINS",
+                "BUY A COLOR FOR 60 COINS",
                 style: TextStyle(color: Colors.white, fontSize: 16),
               ),
             ),

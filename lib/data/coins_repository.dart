@@ -8,6 +8,10 @@ class CoinsNotifier extends StateNotifier<int> {
   void buy(int price) {
     state -= price;
   }
+
+  void levelReward(int reward) {
+    state += reward;
+  }
 }
 
 final coinsProvider = StateNotifierProvider<CoinsNotifier, int>((ref) {
