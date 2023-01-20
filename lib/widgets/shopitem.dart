@@ -1,15 +1,18 @@
 import 'package:breakergame/data/coins_repository.dart';
+import 'package:breakergame/util/user_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/colors_repository.dart';
 import 'animatedbutton.dart';
 
 class ShopItem extends ConsumerWidget {
-  final shopcolor;
-  final bought;
+  final Color shopcolor;
+  final bool bought;
   final int price;
+  final bool equipped;
 
-  ShopItem(this.shopcolor, this.bought, this.price);
+  const ShopItem(this.shopcolor, this.bought, this.price, this.equipped,
+      {super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -55,10 +58,14 @@ class ShopItem extends ConsumerWidget {
               ),
             ),
             child: AnimatedButton(
-              onPressed: () {},
+              onPressed: () {
+                UserSimplePreferences.setEquippedColor(shopcolor.toString());
+                ref.read(equippedColorProvider.state).state =
+                    shopcolor.toString();
+              },
               width: 70,
               height: 40,
-              enabled: true,
+              enabled: !equipped,
               shadowDegree: ShadowDegree.dark,
               child: const Text(
                 'EQUIP',

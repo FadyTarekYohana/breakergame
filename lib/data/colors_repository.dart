@@ -1,3 +1,4 @@
+import 'package:breakergame/util/user_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,3 +21,6 @@ void setColors(List<dynamic> color) {
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .update({'colors': color});
 }
+
+final equippedColorProvider =
+    StateProvider<String>((ref) => UserSimplePreferences.getEquippedColor());

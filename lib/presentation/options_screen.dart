@@ -1,4 +1,5 @@
 import 'package:breakergame/data/users_repository.dart';
+import 'package:breakergame/util/user_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -140,6 +141,7 @@ class _OptionsScreenState extends State<OptionsScreen> {
               padding: const EdgeInsets.all(5.0),
               child: AnimatedButton(
                 onPressed: () async {
+                  await UserSimplePreferences.clear();
                   await FirebaseAuth.instance.signOut();
                   GoRouter.of(context).go('/');
                 },

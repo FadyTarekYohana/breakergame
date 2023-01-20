@@ -37,6 +37,7 @@ class ShopScreenState extends ConsumerState<ShopScreen> {
   Widget build(BuildContext context) {
     final colors = ref.watch(colorsProvider);
     final coins = ref.watch(coinsProvider);
+    final equippedColor = ref.watch(equippedColorProvider);
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(0, 223, 59, 59),
@@ -77,18 +78,27 @@ class ShopScreenState extends ConsumerState<ShopScreen> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: ShopItem(Colors.black,
-                        colors.contains(Colors.black.toString()), 60),
+                    child: ShopItem(
+                        Colors.black,
+                        colors.contains(Colors.black.toString()),
+                        60,
+                        equippedColor == Colors.black.toString()),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: ShopItem(Colors.grey,
-                        colors.contains(Colors.grey.toString()), 60),
+                    child: ShopItem(
+                        Colors.grey,
+                        colors.contains(Colors.grey.toString()),
+                        60,
+                        equippedColor == Colors.grey.toString()),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: ShopItem(Colors.white,
-                        colors.contains(Colors.white.toString()), 60),
+                    child: ShopItem(
+                        Colors.white,
+                        colors.contains(Colors.white.toString()),
+                        60,
+                        equippedColor == Colors.white.toString()),
                   ),
                 ],
               ),
@@ -98,18 +108,27 @@ class ShopScreenState extends ConsumerState<ShopScreen> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ShopItem(Colors.deepOrange,
-                      colors.contains(Colors.deepOrange.toString()), 60),
+                  child: ShopItem(
+                      Colors.deepOrange,
+                      colors.contains(Colors.deepOrange.toString()),
+                      60,
+                      equippedColor == Colors.deepOrange.toString()),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ShopItem(Colors.orange,
-                      colors.contains(Colors.orange.toString()), 60),
+                  child: ShopItem(
+                      Colors.orange,
+                      colors.contains(Colors.orange.toString()),
+                      60,
+                      equippedColor == Colors.orange.toString()),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ShopItem(Colors.amber,
-                      colors.contains(Colors.amber.toString()), 60),
+                  child: ShopItem(
+                      Colors.amber,
+                      colors.contains(Colors.amber.toString()),
+                      60,
+                      equippedColor == Colors.amber.toString()),
                 ),
               ],
             ),
@@ -118,18 +137,27 @@ class ShopScreenState extends ConsumerState<ShopScreen> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ShopItem(Colors.purple,
-                      colors.contains(Colors.purple.toString()), 60),
+                  child: ShopItem(
+                      Colors.purple,
+                      colors.contains(Colors.purple.toString()),
+                      60,
+                      equippedColor == Colors.purple.toString()),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ShopItem(
-                      Colors.pink, colors.contains(Colors.pink.toString()), 60),
+                      Colors.pink,
+                      colors.contains(Colors.pink.toString()),
+                      60,
+                      equippedColor == Colors.pink.toString()),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ShopItem(
-                      Colors.cyan, colors.contains(Colors.cyan.toString()), 60),
+                      Colors.cyan,
+                      colors.contains(Colors.cyan.toString()),
+                      60,
+                      equippedColor == Colors.cyan.toString()),
                 ),
               ],
             ),
