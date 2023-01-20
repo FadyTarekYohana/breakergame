@@ -146,8 +146,29 @@ class _SignUpState extends State<SignUp> {
                       }
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'weak-password') {
-                        print('The password provided is too weak.');
+                        const Padding(
+                          padding: EdgeInsets.all(15.0),
+                          child: Text(
+                            "The password provided is too weak.",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 30),
+                          ),
+                        );
+                        //print('The password provided is too weak.');
                       } else if (e.code == 'email-already-in-use') {
+                        const Padding(
+                          padding: EdgeInsets.all(15.0),
+                          child: Text(
+                            "The account already exists for that email.",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 30),
+                          ),
+                        );
+
                         print('The account already exists for that email.');
                       }
                     } catch (e) {
