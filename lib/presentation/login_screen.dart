@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 
 import '../../widgets/animatedbutton.dart';
 
-
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
 
@@ -22,74 +21,58 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Center(
-          child: Form(
-        key: _formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(top: 50.0),
-              child: Text(
-                "BRICK BREAKER",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    shadows: [
-                      Shadow(
-                        color: Colors.red,
-                        offset: Offset(3.5, 3.5),
-                      ),
-                    ],
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 40),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: TextFormField(
-                controller: emailController,
-                style: const TextStyle(color: Colors.white),
-                decoration: const InputDecoration(
-                  icon: Icon(Icons.email, color: Colors.white),
-                  hintText: 'EMAIl',
-                  hintStyle: TextStyle(color: Colors.white),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
-                  ),
+    return Container(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Center(
+            child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(top: 50.0),
+                child: Text(
+                  "BRICK BREAKER",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      shadows: [
+                        Shadow(
+                          color: Colors.red,
+                          offset: Offset(3.5, 3.5),
+                        ),
+                      ],
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 40),
                 ),
-                validator: (value) {
-                  if (value!.isEmpty || value.length < 8) {
-                    return 'Please enter your email';
-                  } else {
-                    return null;
-                  }
-                },
               ),
-<<<<<<< HEAD
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: TextFormField(
-                controller: passwordController,
-                obscureText: true,
-                style: const TextStyle(color: Colors.white),
-                decoration: const InputDecoration(
-                  icon: Icon(Icons.password, color: Colors.white),
-                  hintText: 'PASSWORD',
-                  hintStyle: TextStyle(color: Colors.white),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: TextFormField(
+                  controller: emailController,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(
+                    icon: Icon(Icons.email, color: Colors.white),
+                    hintText: 'EMAIl',
+                    hintStyle: TextStyle(color: Colors.white),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
                   ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
-=======
+                  validator: (value) {
+                    if (value!.isEmpty || value.length < 8) {
+                      return 'Please enter your email';
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
+              ),
               Text(
                 emailNotFound ? "Email not found!" : "",
                 style: const TextStyle(color: Colors.red),
@@ -110,42 +93,16 @@ class _LoginState extends State<Login> {
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
                     ),
->>>>>>> 1225185b65c765087d73899cf300c6fbcb42a5a3
                   ),
-                ),
-                validator: (value) {
-                  if (value!.isEmpty || value.length < 3) {
-                    return 'Please enter your password';
-                  } else {
-                    return null;
-                  }
-                },
-              ),
-<<<<<<< HEAD
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: AnimatedButton(
-                onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    try {
-                      final credential = await FirebaseAuth.instance
-                          .signInWithEmailAndPassword(
-                              email: emailController.text,
-                              password: passwordController.text);
-                      GoRouter.of(context).go('/homepage');
-                    } on FirebaseAuthException catch (e) {
-                      if (e.code == 'user-not-found') {
-                        print('No user found for that email.');
-                      } else if (e.code == 'wrong-password') {
-                        print('Wrong password provided for that user.');
-                      }
+                  validator: (value) {
+                    if (value!.isEmpty || value.length < 3) {
+                      return 'Please enter your password';
+                    } else {
+                      return null;
                     }
-                  }
-                },
-                enabled: true,
-                shadowDegree: ShadowDegree.dark,
-=======
+                  },
+                ),
+              ),
               Text(
                 wrongPassword ? "Wrong password!" : "",
                 style: const TextStyle(color: Colors.red),
@@ -192,31 +149,19 @@ class _LoginState extends State<Login> {
               ),
               TextButton(
                 onPressed: () => GoRouter.of(context).go('/signup'),
->>>>>>> 1225185b65c765087d73899cf300c6fbcb42a5a3
                 child: const Text(
-                  'LOGIN',
+                  'SIGN UP',
                   style: TextStyle(
-                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
                     color: Colors.white,
-                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
-            ),
-            TextButton(
-              onPressed: () => GoRouter.of(context).go('/signup'),
-              child: const Text(
-                'SIGN UP',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ],
-        ),
-      )),
+            ],
+          ),
+        )),
+      ),
     );
   }
 }
