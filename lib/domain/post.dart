@@ -21,11 +21,11 @@ class Post {
 
   factory Post.fromJson(Map<String, dynamic> json) => Post(
         text: json["text"],
-        author: json["author"] == null ? '' : json["author"],
+        author: json["author"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
         "text": text,
-        "author": author == null ? '' : author,
+        "author": author,
       };
 }

@@ -15,9 +15,11 @@ class Level {
     required this.bricksy,
     required this.barriersx,
     required this.barriersy,
+    required this.timeCreated,
   });
 
   String id;
+  int timeCreated;
   List<double> bricksx;
   List<double> bricksy;
   List<double> barriersx;
@@ -25,6 +27,7 @@ class Level {
 
   factory Level.fromJson(Map<String, dynamic> json) => Level(
         id: json["id"],
+        timeCreated: json["timeCreated"],
         bricksx: List<double>.from(json["bricksx"].map((x) => x.toDouble())),
         bricksy: List<double>.from(json["bricksy"].map((x) => x.toDouble())),
         barriersx:
@@ -35,6 +38,7 @@ class Level {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "timeCreated": timeCreated,
         "bricksx": List<dynamic>.from(bricksx.map((x) => x)),
         "bricksy": List<dynamic>.from(bricksy.map((x) => x)),
         "barriersx": List<dynamic>.from(barriersx.map((x) => x)),

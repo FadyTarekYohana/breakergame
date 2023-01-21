@@ -1,3 +1,4 @@
+import 'package:breakergame/util/color_from_string.dart';
 import 'package:flutter/material.dart';
 
 class MyPlayer extends StatelessWidget {
@@ -15,7 +16,7 @@ class MyPlayer extends StatelessWidget {
           child: Container(
             height: 10,
             width: MediaQuery.of(context).size.width * pw / 2,
-            color: Colors.red,
+            color: equippedColorFromString(),
           ),
         ));
   }

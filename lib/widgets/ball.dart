@@ -1,23 +1,23 @@
+import 'package:breakergame/util/color_from_string.dart';
 import 'package:flutter/material.dart';
 
-class myball extends StatelessWidget {
-  final bx;
-  final by;
+class Ball extends StatelessWidget {
+  final double bx;
+  final double by;
+  final double width;
+  final double height;
 
-  myball(
-    this.bx,
-    this.by,
-  );
+  const Ball(this.bx, this.by, this.width, this.height, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment(bx, by),
       child: Container(
-        height: 15,
-        width: 15,
-        decoration: const BoxDecoration(
-          color: Colors.red,
+        height: MediaQuery.of(context).size.height * height / 2,
+        width: MediaQuery.of(context).size.width * width / 2,
+        decoration: BoxDecoration(
+          color: equippedColorFromString(),
           shape: BoxShape.circle,
         ),
       ),

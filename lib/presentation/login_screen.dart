@@ -14,6 +14,8 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
+  bool emailNotFound = false;
+  bool wrongPassword = false;
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -70,6 +72,7 @@ class _LoginState extends State<Login> {
                   }
                 },
               ),
+<<<<<<< HEAD
             ),
             Padding(
               padding: const EdgeInsets.all(10.0),
@@ -86,6 +89,28 @@ class _LoginState extends State<Login> {
                   ),
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.white),
+=======
+              Text(
+                emailNotFound ? "Email not found!" : "",
+                style: const TextStyle(color: Colors.red),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: TextFormField(
+                  controller: passwordController,
+                  obscureText: true,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(
+                    icon: Icon(Icons.password, color: Colors.white),
+                    hintText: 'PASSWORD',
+                    hintStyle: TextStyle(color: Colors.white),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+>>>>>>> 1225185b65c765087d73899cf300c6fbcb42a5a3
                   ),
                 ),
                 validator: (value) {
@@ -96,6 +121,7 @@ class _LoginState extends State<Login> {
                   }
                 },
               ),
+<<<<<<< HEAD
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -119,6 +145,54 @@ class _LoginState extends State<Login> {
                 },
                 enabled: true,
                 shadowDegree: ShadowDegree.dark,
+=======
+              Text(
+                wrongPassword ? "Wrong password!" : "",
+                style: const TextStyle(color: Colors.red),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: AnimatedButton(
+                  height: 50,
+                  width: 140,
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      try {
+                        final credential = await FirebaseAuth.instance
+                            .signInWithEmailAndPassword(
+                                email: emailController.text,
+                                password: passwordController.text);
+                        GoRouter.of(context).go('/homepage');
+                      } on FirebaseAuthException catch (e) {
+                        if (e.code == 'user-not-found') {
+                          setState(() {
+                            emailNotFound = true;
+                            wrongPassword = false;
+                          });
+                        } else if (e.code == 'wrong-password') {
+                          setState(() {
+                            emailNotFound = false;
+                            wrongPassword = true;
+                          });
+                        }
+                      }
+                    }
+                  },
+                  enabled: true,
+                  shadowDegree: ShadowDegree.dark,
+                  child: const Text(
+                    'LOGIN',
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ),
+              TextButton(
+                onPressed: () => GoRouter.of(context).go('/signup'),
+>>>>>>> 1225185b65c765087d73899cf300c6fbcb42a5a3
                 child: const Text(
                   'LOGIN',
                   style: TextStyle(

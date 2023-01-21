@@ -1,24 +1,25 @@
+import 'package:breakergame/data/music_repository.dart';
 import 'package:breakergame/data/users_repository.dart';
+import 'package:breakergame/util/user_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:breakergame/widgets/backbutton.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 import '../../widgets/animatedbutton.dart';
-import '../widgets/quote_of_the_day.dart';
 
-class OptionsScreen extends StatefulWidget {
+class OptionsScreen extends ConsumerStatefulWidget {
   const OptionsScreen({Key? key}) : super(key: key);
 
   @override
-  State<OptionsScreen> createState() => _OptionsScreenState();
+  OptionsScreenState createState() => OptionsScreenState();
 }
 
-class _OptionsScreenState extends State<OptionsScreen> {
+class OptionsScreenState extends ConsumerState<OptionsScreen> {
   TextEditingController adminCodeController = TextEditingController();
-  final player = AudioPlayer();
-  bool music = true;
+
   bool isAdmin = false;
   var code = '';
 
@@ -32,6 +33,7 @@ class _OptionsScreenState extends State<OptionsScreen> {
     }
     code = await getAdminCode();
     setState(() {
+      ref.read(musicProvider.notifier).state = UserSimplePreferences.getMusic();
       code;
     });
   }
@@ -44,6 +46,7 @@ class _OptionsScreenState extends State<OptionsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final music = ref.watch(musicProvider);
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Center(
@@ -121,15 +124,20 @@ class _OptionsScreenState extends State<OptionsScreen> {
                 ),
                 Switch(
                   value: music,
-                  onChanged: (value) {
-                    setState(() {
-                      music = value;
-                      if (music == true) {
-                        player.play(AssetSource('audio/audio.mp3'));
-                      } else {
-                        player.stop();
-                      }
-                    });
+                  onChanged: (value) async {
+                    if (value) {
+                      await UserSimplePreferences.setMusic(value);
+                      ref.read(musicProvider.state).state =
+                          UserSimplePreferences.getMusic();
+
+                      getPlayer().play(AssetSource('audio/audio.mp3'));
+                    } else {
+                      await UserSimplePreferences.setMusic(value);
+                      ref.read(musicProvider.state).state =
+                          UserSimplePreferences.getMusic();
+
+                      getPlayer().stop();
+                    }
                   },
                   activeTrackColor: const Color.fromARGB(255, 126, 25, 18),
                   activeColor: const Color.fromARGB(255, 255, 0, 0),
@@ -140,6 +148,7 @@ class _OptionsScreenState extends State<OptionsScreen> {
               padding: const EdgeInsets.all(5.0),
               child: AnimatedButton(
                 onPressed: () async {
+                  await UserSimplePreferences.clear();
                   await FirebaseAuth.instance.signOut();
                   GoRouter.of(context).go('/');
                 },
@@ -155,7 +164,6 @@ class _OptionsScreenState extends State<OptionsScreen> {
                 ),
               ),
             ),
-            QuoteOfTheDay(),
             Padding(
                 padding: const EdgeInsets.only(top: 50),
                 child: Back('/homepage')),
