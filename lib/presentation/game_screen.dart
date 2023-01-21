@@ -230,15 +230,18 @@ class GameScreenState extends ConsumerState<GameScreen> {
       double rightSideDist = (playerX + playerWidth - ballX).abs();
       if (ballY >= 0.9 && ballX >= playerX && ballX <= playerX + playerWidth) {
         ballYDirection = direction.UP;
-        String min = findMin(leftSideDist, rightSideDist, 1000, 1000);
-        switch (min) {
-          case 'left':
-            ballXDirection = direction.LEFT;
-            break;
-          case 'right':
-            ballXDirection = direction.RIGHT;
-            break;
-          default:
+        ballXDirection = direction.UP;
+        if ((leftSideDist - rightSideDist).abs() >= playerWidth * 0.25) {
+          String min = findMin(leftSideDist, rightSideDist, 1000, 1000);
+          switch (min) {
+            case 'left':
+              ballXDirection = direction.LEFT;
+              break;
+            case 'right':
+              ballXDirection = direction.RIGHT;
+              break;
+            default:
+          }
         }
       } else if (ballY <= -0.82) {
         ballYDirection = direction.DOWN;
@@ -257,7 +260,7 @@ class GameScreenState extends ConsumerState<GameScreen> {
       if (dropPowerUp) {
         powerUpY += 0.005;
       }
-      if (powerUpY >= 1) {
+      if (powerUpY >= 0.95) {
         dropPowerUp = false;
       }
       if (powerUpY >= 0.9 &&
@@ -276,7 +279,7 @@ class GameScreenState extends ConsumerState<GameScreen> {
       if (dropPowerDown) {
         powerDownY += 0.008;
       }
-      if (powerDownY >= 1) {
+      if (powerDownY >= 0.95) {
         dropPowerDown = false;
       }
       if (powerDownY >= 0.9 &&
