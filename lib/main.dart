@@ -10,7 +10,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("Handling a background message: ${message.messageId}");
 }
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
@@ -25,7 +25,7 @@ void main() async {
       print('Message also contained a notification: ${message.notification}');
     }
   });
-  await UserSimplePreferences.init;
+  await UserSimplePreferences.init();
 
   runApp(const ProviderScope(child: MyApp()));
 }

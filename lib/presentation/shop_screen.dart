@@ -79,6 +79,14 @@ class ShopScreenState extends ConsumerState<ShopScreen> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ShopItem(
+                        Colors.white,
+                        colors.contains(Colors.white.toString()),
+                        60,
+                        equippedColor == Colors.white.toString()),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ShopItem(
                         Colors.black,
                         colors.contains(Colors.black.toString()),
                         60,
@@ -91,14 +99,6 @@ class ShopScreenState extends ConsumerState<ShopScreen> {
                         colors.contains(Colors.grey.toString()),
                         60,
                         equippedColor == Colors.grey.toString()),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ShopItem(
-                        Colors.white,
-                        colors.contains(Colors.white.toString()),
-                        60,
-                        equippedColor == Colors.white.toString()),
                   ),
                 ],
               ),

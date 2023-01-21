@@ -1,3 +1,4 @@
+import 'package:breakergame/util/color_from_string.dart';
 import 'package:flutter/material.dart';
 
 class myball extends StatelessWidget {
@@ -16,8 +17,8 @@ class myball extends StatelessWidget {
       child: Container(
         height: 15,
         width: 15,
-        decoration: const BoxDecoration(
-          color: Colors.red,
+        decoration: BoxDecoration(
+          color: equippedColorFromString(),
           shape: BoxShape.circle,
         ),
       ),

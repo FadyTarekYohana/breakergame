@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:breakergame/domain/user.dart';
 import 'package:firebase_auth/firebase_auth.dart' show FirebaseAuth;
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
 
 void createUser(String type, String email, String id) async {
   final docUsers = FirebaseFirestore.instance.collection('users').doc(id);
@@ -10,7 +10,7 @@ void createUser(String type, String email, String id) async {
       type: type,
       coins: 0,
       email: email,
-      colors: ["MaterialColor(primary value: Color(0xff9e9e9e))"]);
+      colors: [Colors.white.toString()]);
   final json = user.toJson();
   await docUsers.set(json);
 }

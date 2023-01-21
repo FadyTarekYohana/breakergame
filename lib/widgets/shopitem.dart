@@ -24,7 +24,7 @@ class ShopItem extends ConsumerWidget {
             borderRadius: BorderRadius.circular(20),
             child: Container(
               color: shopcolor,
-              width: 70,
+              width: 100,
               height: 50,
             ),
           ),
@@ -44,7 +44,7 @@ class ShopItem extends ConsumerWidget {
                   setColors(ref.read(colorsProvider));
                 }
               },
-              width: 70,
+              width: 100,
               height: 40,
               enabled: true,
               shadowDegree: ShadowDegree.dark,
@@ -58,18 +58,19 @@ class ShopItem extends ConsumerWidget {
               ),
             ),
             child: AnimatedButton(
-              onPressed: () {
-                UserSimplePreferences.setEquippedColor(shopcolor.toString());
+              onPressed: () async {
+                await UserSimplePreferences.setEquippedColor(
+                    shopcolor.toString());
                 ref.read(equippedColorProvider.state).state =
-                    shopcolor.toString();
+                    UserSimplePreferences.getEquippedColor();
               },
-              width: 70,
+              width: 100,
               height: 40,
               enabled: !equipped,
               shadowDegree: ShadowDegree.dark,
-              child: const Text(
-                'EQUIP',
-                style: TextStyle(
+              child: Text(
+                equipped ? "EQUIPPED" : "EQUIP",
+                style: const TextStyle(
                   fontSize: 15,
                   color: Colors.white,
                   fontWeight: FontWeight.w500,

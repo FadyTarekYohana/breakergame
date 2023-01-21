@@ -6,9 +6,8 @@ class Brick extends StatelessWidget {
   final double x;
   final double y;
   final bool broken;
-  final Color Customcolor;
 
-  Brick(this.width, this.height, this.x, this.y, this.broken, this.Customcolor);
+  Brick(this.width, this.height, this.x, this.y, this.broken);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +20,7 @@ class Brick extends StatelessWidget {
               child: Container(
                 height: MediaQuery.of(context).size.height * height / 2,
                 width: MediaQuery.of(context).size.width * width / 2,
-                color: Customcolor,
+                color: Colors.white,
               ),
             ));
   }

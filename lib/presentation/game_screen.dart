@@ -405,7 +405,6 @@ class GameScreenState extends ConsumerState<GameScreen> {
                   bricksx[i],
                   bricksy[i],
                   broken[i],
-                  Customcolor,
                 ),
               for (int i = 0; i < barriersx.length; i++)
                 Barrier(

@@ -9,11 +9,11 @@ class UserSimplePreferences {
   static Future init() async =>
       _preferences = await SharedPreferences.getInstance();
 
-  static Future clear() async => _preferences!.clear();
+  static Future clear() async => _preferences?.clear();
 
   static Future setEquippedColor(String equippedColor) async =>
       await _preferences?.setString(_keyEquippedColor, equippedColor);
 
   static String getEquippedColor() =>
-      _preferences?.getString(_keyEquippedColor) ?? Colors.grey.toString();
+      _preferences?.getString(_keyEquippedColor) ?? Colors.white.toString();
 }
