@@ -1,3 +1,4 @@
+import 'package:breakergame/presentation/profile_screen.dart';
 import 'package:breakergame/routing/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -35,6 +36,11 @@ final GoRouter router = GoRouter(
       path: '/creditsscreen',
       builder: (BuildContext context, GoRouterState state) =>
           const CreditsScreen(),
+    ),
+    GoRoute(
+      path: '/profilescreen',
+      builder: (BuildContext context, GoRouterState state) =>
+          const ProfileScreen(),
     ),
     GoRoute(
       path: '/optionsscreen',

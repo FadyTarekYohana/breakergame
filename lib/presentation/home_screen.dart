@@ -98,6 +98,22 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: AnimatedButton(
+              onPressed: () => GoRouter.of(context).go('/profilescreen'),
+              enabled: true,
+              shadowDegree: ShadowDegree.dark,
+              child: const Text(
+                'PROFILE',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ),
         ],
       )),
     );

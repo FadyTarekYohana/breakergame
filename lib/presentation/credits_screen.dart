@@ -18,6 +18,12 @@ class CreditsScreen extends StatelessWidget {
               child: Text(
                 "FADY TAREK",
                 style: TextStyle(
+                    shadows: [
+                      Shadow(
+                        color: Colors.red,
+                        offset: Offset(3.4, 3.4),
+                      ),
+                    ],
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 30),
@@ -28,6 +34,12 @@ class CreditsScreen extends StatelessWidget {
               child: Text(
                 "MOHAMED YASSER",
                 style: TextStyle(
+                    shadows: [
+                      Shadow(
+                        color: Colors.red,
+                        offset: Offset(3.4, 3.4),
+                      ),
+                    ],
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 30),
@@ -38,6 +50,12 @@ class CreditsScreen extends StatelessWidget {
               child: Text(
                 "ALYELDIN KHAIRY",
                 style: TextStyle(
+                    shadows: [
+                      Shadow(
+                        color: Colors.red,
+                        offset: Offset(3.4, 3.4),
+                      ),
+                    ],
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 30),
@@ -48,6 +66,12 @@ class CreditsScreen extends StatelessWidget {
               child: Text(
                 "AHMED HAMOUDA",
                 style: TextStyle(
+                    shadows: [
+                      Shadow(
+                        color: Colors.red,
+                        offset: Offset(3.4, 3.4),
+                      ),
+                    ],
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 30),
@@ -58,6 +82,12 @@ class CreditsScreen extends StatelessWidget {
               child: Text(
                 "HADY HANY",
                 style: TextStyle(
+                    shadows: [
+                      Shadow(
+                        color: Colors.red,
+                        offset: Offset(3.4, 3.4),
+                      ),
+                    ],
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 30),
