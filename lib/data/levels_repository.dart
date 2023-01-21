@@ -17,20 +17,31 @@ void createLevel(List<List<double>> bricks, List<List<double>> barriers) async {
         : barriersx.add(flattenedBarriers[i]);
   }
 
+  String time = DateTime.now().year.toString() +
+      DateTime.now().month.toString() +
+      DateTime.now().day.toString() +
+      DateTime.now().hour.toString() +
+      DateTime.now().minute.toString() +
+      DateTime.now().second.toString();
+
   final docLevels = FirebaseFirestore.instance.collection('levels').doc();
   final level = Level(
       id: docLevels.id,
       bricksx: bricksx,
       bricksy: bricksy,
       barriersx: barriersx,
-      barriersy: barriersy);
+      barriersy: barriersy,
+      timeCreated: int.parse(time));
   final json = level.toJson();
   await docLevels.set(json);
 }
 
 Stream<List<Level>> readLevels() {
-  return FirebaseFirestore.instance.collection('levels').snapshots().map(
-      (snapshot) =>
+  return FirebaseFirestore.instance
+      .collection('levels')
+      .orderBy("timeCreated", descending: false)
+      .snapshots()
+      .map((snapshot) =>
           snapshot.docs.map((doc) => Level.fromJson(doc.data())).toList());
 }
 

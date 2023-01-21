@@ -51,7 +51,8 @@ class _QuoteOfTheDayState extends State<QuoteOfTheDay> {
         child: Padding(
           padding: const EdgeInsets.only(top: 15.0),
           child: Text(
-            "QOTD: ${posts.isNotEmpty ? posts[Random(int.parse(seed)).nextInt(posts.length)].text : null}",
+            "${posts.isNotEmpty ? posts[Random(int.parse(seed)).nextInt(posts.length)].text : null}",
+            textAlign: TextAlign.center,
             style: const TextStyle(
               fontSize: 15,
               color: Colors.white,

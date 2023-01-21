@@ -5,6 +5,7 @@ class UserSimplePreferences {
   static SharedPreferences? _preferences;
 
   static const _keyEquippedColor = "equippedColor";
+  static const _keyMusic = "music";
 
   static Future init() async =>
       _preferences = await SharedPreferences.getInstance();
@@ -16,4 +17,9 @@ class UserSimplePreferences {
 
   static String getEquippedColor() =>
       _preferences?.getString(_keyEquippedColor) ?? Colors.white.toString();
+
+  static Future setMusic(bool music) async =>
+      await _preferences?.setBool(_keyMusic, music);
+
+  static bool getMusic() => _preferences?.getBool(_keyMusic) ?? true;
 }

@@ -14,6 +14,8 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
+  bool weakPassword = false;
+  bool emailAlreadyInUse = false;
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -31,7 +33,7 @@ class _SignUpState extends State<SignUp> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Padding(
-              padding: EdgeInsets.only(top: 50.0),
+              padding: EdgeInsets.only(top: 30.0),
               child: Text(
                 "BRICK BREAKER",
                 textAlign: TextAlign.center,
@@ -48,7 +50,7 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(2.0),
               child: TextFormField(
                 controller: emailController,
                 style: const TextStyle(color: Colors.white),
@@ -72,8 +74,14 @@ class _SignUpState extends State<SignUp> {
                 },
               ),
             ),
+            Text(
+              emailAlreadyInUse
+                  ? "The account already exists for that email!"
+                  : "",
+              style: const TextStyle(color: Colors.red),
+            ),
             Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(2.0),
               child: TextFormField(
                 controller: passwordController,
                 obscureText: true,
@@ -98,8 +106,12 @@ class _SignUpState extends State<SignUp> {
                 },
               ),
             ),
+            Text(
+              weakPassword ? "The password provided is too weak!" : "",
+              style: const TextStyle(color: Colors.red),
+            ),
             Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(2.0),
               child: TextFormField(
                 controller: adminCodeController,
                 obscureText: true,
@@ -118,7 +130,7 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(3.0),
               child: AnimatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
@@ -146,30 +158,15 @@ class _SignUpState extends State<SignUp> {
                       }
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'weak-password') {
-                        const Padding(
-                          padding: EdgeInsets.all(15.0),
-                          child: Text(
-                            "The password provided is too weak.",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 30),
-                          ),
-                        );
-                        //print('The password provided is too weak.');
+                        setState(() {
+                          weakPassword = true;
+                          emailAlreadyInUse = false;
+                        });
                       } else if (e.code == 'email-already-in-use') {
-                        const Padding(
-                          padding: EdgeInsets.all(15.0),
-                          child: Text(
-                            "The account already exists for that email.",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 30),
-                          ),
-                        );
-
-                        print('The account already exists for that email.');
+                        setState(() {
+                          weakPassword = false;
+                          emailAlreadyInUse = true;
+                        });
                       }
                     } catch (e) {
                       print(e);
@@ -177,11 +174,13 @@ class _SignUpState extends State<SignUp> {
                   }
                 },
                 enabled: true,
+                height: 50,
+                width: 160,
                 shadowDegree: ShadowDegree.dark,
                 child: const Text(
                   'SIGN UP',
                   style: TextStyle(
-                    fontSize: 22,
+                    fontSize: 25,
                     color: Colors.white,
                     fontWeight: FontWeight.w500,
                   ),

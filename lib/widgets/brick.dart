@@ -7,7 +7,8 @@ class Brick extends StatelessWidget {
   final double y;
   final bool broken;
 
-  Brick(this.width, this.height, this.x, this.y, this.broken);
+  const Brick(this.width, this.height, this.x, this.y, this.broken,
+      {super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../widgets/animatedbutton.dart';
+import '../widgets/quote_of_the_day.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -33,6 +34,10 @@ class HomePage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontSize: 40),
             ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20.0, left: 5, right: 5),
+            child: QuoteOfTheDay(),
           ),
           Padding(
             padding: const EdgeInsets.all(5.0),

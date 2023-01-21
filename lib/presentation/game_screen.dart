@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:breakergame/data/coins_repository.dart';
-import 'package:breakergame/widgets/backbutton.dart';
 import 'package:breakergame/widgets/ball.dart';
 import 'package:breakergame/widgets/barrier.dart';
 import 'package:breakergame/widgets/brick.dart';
@@ -26,7 +25,7 @@ class GameScreen extends ConsumerStatefulWidget {
   GameScreenState createState() => GameScreenState();
 }
 
-enum direction { UP, DOWN, LEFT, RIGHT }
+enum DIRECTION { up, down, left, right }
 
 class GameScreenState extends ConsumerState<GameScreen> {
   List<dynamic> bricksx = [],
@@ -37,8 +36,10 @@ class GameScreenState extends ConsumerState<GameScreen> {
 
   double ballX = 0;
   double ballY = 0;
-  double ballXmovement = 0.01;
-  double ballYmovement = 0.01;
+  double ballWidth = 0.08;
+  double ballHeight = 0.08;
+  double ballXmovement = 0.02;
+  double ballYmovement = 0.02;
 
   double powerUpX = 0;
   double powerUpY = 0;
@@ -48,12 +49,11 @@ class GameScreenState extends ConsumerState<GameScreen> {
   double powerDownY = 0;
   bool dropPowerDown = false;
 
-  var ballXDirection = direction.DOWN;
-  var ballYDirection = direction.DOWN;
+  var ballXDirection = DIRECTION.down;
+  var ballYDirection = DIRECTION.down;
 
   double brickWidth = 0.25;
   double brickHeight = 0.05;
-  final Customcolor = Colors.red;
 
   double barrierWidth = 0.25;
   double barrierHeight = 0.05;
@@ -114,16 +114,16 @@ class GameScreenState extends ConsumerState<GameScreen> {
 
           switch (min) {
             case 'left':
-              ballXDirection = direction.LEFT;
+              ballXDirection = DIRECTION.left;
               break;
             case 'right':
-              ballXDirection = direction.RIGHT;
+              ballXDirection = DIRECTION.right;
               break;
             case 'top':
-              ballYDirection = direction.UP;
+              ballYDirection = DIRECTION.up;
               break;
             case 'bottom':
-              ballYDirection = direction.DOWN;
+              ballYDirection = DIRECTION.down;
               break;
             default:
           }
@@ -156,13 +156,28 @@ class GameScreenState extends ConsumerState<GameScreen> {
 
   void checkForBrokenBricks() {
     for (int i = 0; i < bricksx.length; i++) {
+      print(ballX + 0.2);
       if (ballX >= bricksx[i] &&
           ballX <= bricksx[i] + brickWidth &&
           ballY >= bricksy[i] &&
           ballY <= bricksy[i] + brickHeight &&
           broken[i] == false) {
         if (!dropPowerUp) checkPowerUp(bricksx[i], bricksy[i]);
-        if (!dropPowerDown) checkPowerDown(bricksx[i], bricksy[i]);
+        if (!dropPowerDown && !dropPowerUp) {
+          checkPowerDown(bricksx[i], bricksy[i]);
+        }
+
+        print("brickx ${bricksx[i]}");
+        print("ballx ${ballX}");
+        print("brickx+width ${bricksx[i] + brickWidth}");
+        print("################");
+        print("bricksy ${bricksy[i]}");
+        print("bally ${ballY}");
+        print("bricky+height ${bricksy[i] + brickHeight}");
+        print("################");
+        print("broken ${broken[i]}");
+        print("################");
+
         setState(() {
           broken[i] = true;
           double leftSideDist = (bricksx[i] - ballX).abs();
@@ -175,16 +190,16 @@ class GameScreenState extends ConsumerState<GameScreen> {
 
           switch (min) {
             case 'left':
-              ballXDirection = direction.LEFT;
+              ballXDirection = DIRECTION.left;
               break;
             case 'right':
-              ballXDirection = direction.RIGHT;
+              ballXDirection = DIRECTION.right;
               break;
             case 'top':
-              ballYDirection = direction.UP;
+              ballYDirection = DIRECTION.up;
               break;
             case 'bottom':
-              ballYDirection = direction.DOWN;
+              ballYDirection = DIRECTION.down;
               break;
             default:
           }
@@ -229,28 +244,28 @@ class GameScreenState extends ConsumerState<GameScreen> {
       double leftSideDist = (playerX - ballX).abs();
       double rightSideDist = (playerX + playerWidth - ballX).abs();
       if (ballY >= 0.9 && ballX >= playerX && ballX <= playerX + playerWidth) {
-        ballYDirection = direction.UP;
-        ballXDirection = direction.UP;
+        ballYDirection = DIRECTION.up;
+        ballXDirection = DIRECTION.up;
         if ((leftSideDist - rightSideDist).abs() >= playerWidth * 0.25) {
           String min = findMin(leftSideDist, rightSideDist, 1000, 1000);
           switch (min) {
             case 'left':
-              ballXDirection = direction.LEFT;
+              ballXDirection = DIRECTION.left;
               break;
             case 'right':
-              ballXDirection = direction.RIGHT;
+              ballXDirection = DIRECTION.right;
               break;
             default:
           }
         }
       } else if (ballY <= -0.82) {
-        ballYDirection = direction.DOWN;
+        ballYDirection = DIRECTION.down;
       }
 
       if (ballX >= 1) {
-        ballXDirection = direction.LEFT;
+        ballXDirection = DIRECTION.left;
       } else if (ballX <= -1) {
-        ballXDirection = direction.RIGHT;
+        ballXDirection = DIRECTION.right;
       }
     });
   }
@@ -295,15 +310,15 @@ class GameScreenState extends ConsumerState<GameScreen> {
 
   void moveBall() {
     setState(() {
-      if (ballXDirection == direction.LEFT) {
+      if (ballXDirection == DIRECTION.left) {
         ballX -= ballXmovement;
-      } else if (ballXDirection == direction.RIGHT) {
+      } else if (ballXDirection == DIRECTION.right) {
         ballX += ballXmovement;
       }
 
-      if (ballYDirection == direction.DOWN) {
+      if (ballYDirection == DIRECTION.down) {
         ballY += ballYmovement;
-      } else if (ballYDirection == direction.UP) {
+      } else if (ballYDirection == DIRECTION.up) {
         ballY -= ballYmovement;
       }
     });
@@ -346,10 +361,10 @@ class GameScreenState extends ConsumerState<GameScreen> {
       isGameOver = false;
       hasGameStarted = false;
       levelComplete = false;
-      ballXDirection = direction.DOWN;
-      ballYDirection = direction.DOWN;
+      ballXDirection = DIRECTION.down;
+      ballYDirection = DIRECTION.down;
       playerX = -0.15;
-      playerWidth = 0.3;
+      playerWidth = 0.4;
     });
   }
 
@@ -380,17 +395,20 @@ class GameScreenState extends ConsumerState<GameScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 20.0),
                 child: AnimatedButton(
-                  child: Icon(Icons.arrow_back_rounded, color: Colors.white),
                   onPressed: () {
-                    broken.forEach((element) {
-                      element = false;
-                    });
+                    if (isLevelComplete()) {
+                      ref.watch(coinsProvider.notifier).levelReward(20);
+                      setCoins(ref.read(coinsProvider));
+                    }
                     GoRouter.of(context).go('/levels');
+                    resetGame();
                   },
                   width: 50,
                   height: 50,
                   enabled: true,
                   shadowDegree: ShadowDegree.dark,
+                  child:
+                      const Icon(Icons.arrow_back_rounded, color: Colors.white),
                 ),
               ),
               LevelCompleteScreen(isLevelComplete: levelComplete, resetGame),
@@ -409,13 +427,10 @@ class GameScreenState extends ConsumerState<GameScreen> {
                   bricksy[i],
                   broken[i],
                 ),
+              Ball(ballX, ballY, ballWidth, ballHeight),
               for (int i = 0; i < barriersx.length; i++)
                 Barrier(
                     barrierWidth, barrierHeight, barriersx[i], barriersy[i]),
-              myball(
-                ballX,
-                ballY,
-              ),
               MyPlayer(playerX, playerWidth)
             ],
           ),

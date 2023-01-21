@@ -13,6 +13,8 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
+  bool emailNotFound = false;
+  bool wrongPassword = false;
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -71,6 +73,10 @@ class _LoginState extends State<Login> {
                   },
                 ),
               ),
+              Text(
+                emailNotFound ? "Email not found!" : "",
+                style: const TextStyle(color: Colors.red),
+              ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: TextFormField(
@@ -97,17 +103,15 @@ class _LoginState extends State<Login> {
                   },
                 ),
               ),
+              Text(
+                wrongPassword ? "Wrong password!" : "",
+                style: const TextStyle(color: Colors.red),
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: AnimatedButton(
-                  child: Text(
-                    'LOGIN',
-                    style: TextStyle(
-                      fontSize: 22,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
+                  height: 50,
+                  width: 140,
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       try {
@@ -118,15 +122,29 @@ class _LoginState extends State<Login> {
                         GoRouter.of(context).go('/homepage');
                       } on FirebaseAuthException catch (e) {
                         if (e.code == 'user-not-found') {
-                          print('No user found for that email.');
+                          setState(() {
+                            emailNotFound = true;
+                            wrongPassword = false;
+                          });
                         } else if (e.code == 'wrong-password') {
-                          print('Wrong password provided for that user.');
+                          setState(() {
+                            emailNotFound = false;
+                            wrongPassword = true;
+                          });
                         }
                       }
                     }
                   },
                   enabled: true,
                   shadowDegree: ShadowDegree.dark,
+                  child: const Text(
+                    'LOGIN',
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                 ),
               ),
               TextButton(

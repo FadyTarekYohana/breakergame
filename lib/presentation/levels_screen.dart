@@ -42,7 +42,7 @@ class _LevelsScreenState extends State<LevelsScreen> {
           stream: readLevels(),
           builder: (context, snapshot) {
             if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-              final allLevels = snapshot.data!.reversed.toList();
+              final allLevels = snapshot.data!.toList();
               return Stack(children: [
                 const Padding(
                   padding: EdgeInsets.all(50.0),
@@ -155,7 +155,7 @@ class _LevelsScreenState extends State<LevelsScreen> {
                     Padding(
                         padding: const EdgeInsets.all(20),
                         child: Back('/homepage')),
-                    const Text(
+                    Text(
                       'THERE ARE NO LEVELS',
                       style: TextStyle(color: Colors.white),
                     )
