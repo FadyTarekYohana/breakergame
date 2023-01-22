@@ -60,7 +60,7 @@ class ShopScreenState extends ConsumerState<ShopScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(50.0),
+                  padding: const EdgeInsets.all(20.0),
                   child: Text(
                     "COINS: $coins",
                     style: const TextStyle(

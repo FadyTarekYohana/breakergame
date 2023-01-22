@@ -43,77 +43,81 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-              Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(0),
-                    child: Text(
-                      "Email:",
-                      style: TextStyle(
-                          // shadows: [
-                          //   Shadow(
-                          //     color: Colors.red,
-                          //     offset: Offset(3.4, 3.4),
-                          //   ),
-                          // ],
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30),
+              Expanded(
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(5.0),
+                      child: Text(
+                        "Email:",
+                        style: TextStyle(
+                            // shadows: [
+                            //   Shadow(
+                            //     color: Colors.red,
+                            //     offset: Offset(3.4, 3.4),
+                            //   ),
+                            // ],
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30),
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(0),
-                    child: Text(
-                      "${loaded ? user['email'] : "Loading user info..."}",
-                      style: TextStyle(
-                          // shadows: [
-                          //   Shadow(
-                          //     color: Colors.red,
-                          //     offset: Offset(3.4, 3.4),
-                          //   ),
-                          // ],
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20),
+                    Padding(
+                      padding: EdgeInsets.all(0),
+                      child: Text(
+                        "${loaded ? user['email'] : "Loading user info..."}",
+                        style: TextStyle(
+                            // shadows: [
+                            //   Shadow(
+                            //     color: Colors.red,
+                            //     offset: Offset(3.4, 3.4),
+                            //   ),
+                            // ],
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(0),
-                    child: Text(
-                      "Coins:",
-                      style: TextStyle(
-                          // shadows: [
-                          //   Shadow(
-                          //     color: Colors.red,
-                          //     offset: Offset(3.4, 3.4),
-                          //   ),
-                          // ],
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30),
+              Expanded(
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(0),
+                      child: Text(
+                        "Coins:",
+                        style: TextStyle(
+                            // shadows: [
+                            //   Shadow(
+                            //     color: Colors.red,
+                            //     offset: Offset(3.4, 3.4),
+                            //   ),
+                            // ],
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30),
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: Text(
-                      "${loaded ? user['coins'] : "Loading user info..."}",
-                      style: TextStyle(
-                          // shadows: [
-                          //   Shadow(
-                          //     color: Colors.red,
-                          //     offset: Offset(3.4, 3.4),
-                          //   ),
-                          // ],
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25),
+                    Padding(
+                      padding: EdgeInsets.all(5.0),
+                      child: Text(
+                        "${loaded ? user['coins'] : "Loading user info..."}",
+                        style: TextStyle(
+                            // shadows: [
+                            //   Shadow(
+                            //     color: Colors.red,
+                            //     offset: Offset(3.4, 3.4),
+                            //   ),
+                            // ],
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(30.0),
