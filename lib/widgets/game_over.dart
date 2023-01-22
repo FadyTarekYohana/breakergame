@@ -11,6 +11,7 @@ class GameOverScreen extends StatelessWidget {
     return isGameOver
         ? Stack(
             children: [
+              //Container to print text
               Container(
                 alignment: const Alignment(0, -0.3),
                 child: const Text(
@@ -20,7 +21,9 @@ class GameOverScreen extends StatelessWidget {
                 ),
               ),
               Container(
-                  alignment: const Alignment(0, 0),
+                  alignment:
+                      //Container to add button play again
+                      const Alignment(0, 0),
                   child: GestureDetector(
                       onTap: function,
                       child: ClipRRect(
